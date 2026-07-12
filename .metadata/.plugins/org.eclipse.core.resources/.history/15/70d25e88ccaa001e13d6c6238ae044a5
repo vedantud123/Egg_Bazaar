@@ -1,0 +1,247 @@
+package com.poultry;
+
+public class loc
+{
+	public static int state_layer(String location) {
+		int stateId = 0;
+		if (location != null) {
+
+			if (location.equalsIgnoreCase("Bengaluru")) {
+				stateId = 1;
+			} else if (location.equalsIgnoreCase("Namakkal")) {
+				stateId = 2;
+			} else if (location.equalsIgnoreCase("Hospet")) {
+				stateId = 3;
+			} else if (location.equalsIgnoreCase("Mysuru")) {
+				stateId = 4;
+			} else if (location.equalsIgnoreCase("Mangalore")) {
+				stateId = 5;
+			} else if (location.equalsIgnoreCase("Hyderabad")) {
+				stateId = 6;
+			} else if (location.equalsIgnoreCase("Jabalpur")) {
+				stateId = 7;
+			} else if (location.equalsIgnoreCase("Pune")) {
+				stateId = 8;
+			} else if (location.equalsIgnoreCase("Ahmedabad")) {
+				stateId = 9;
+			} else if (location.equalsIgnoreCase("Ajmer")) {
+				stateId = 10;
+			} else if (location.equalsIgnoreCase("Brahmapur")) {
+				stateId = 11;
+			} else if (location.equalsIgnoreCase("Barwala")) {
+				stateId = 12;
+			} else if (location.equalsIgnoreCase("Chennai")) {
+				stateId = 13;
+			} else if (location.equalsIgnoreCase("Chittor")) {
+				stateId = 14;
+			} else if (location.equalsIgnoreCase("Delhi")) {
+				stateId = 15;
+			} else if (location.equalsIgnoreCase("E.Godavari")) {
+				stateId = 16;
+			} else if (location.equalsIgnoreCase("Kolkata")) {
+				stateId = 17;
+			} else if (location.equalsIgnoreCase("Ludhiana")) {
+				stateId = 18;
+			} else if (location.equalsIgnoreCase("Mumbai")) {
+				stateId = 19;
+			} else if (location.equalsIgnoreCase("Raipur")) {
+				stateId = 20;
+			} else if (location.equalsIgnoreCase("Surat")) {
+				stateId = 21;
+			} else if (location.equalsIgnoreCase("Vijayawada")) {
+				stateId = 22;
+			} else if (location.equalsIgnoreCase("Vizag")) {
+				stateId = 23;
+			} else if (location.equalsIgnoreCase("W.Godavari")) {
+				stateId = 24;
+			} else if (location.equalsIgnoreCase("Warangal")) {
+				stateId = 25;
+			} else if (location.equalsIgnoreCase("Patna")) {
+				stateId = 26;
+			}else if (location.equalsIgnoreCase("Anand")) {
+				stateId = 27;
+			}else if (location.equalsIgnoreCase("Godavari")) {
+				stateId = 28;
+			}else if (location.equalsIgnoreCase("Karnal")) {
+				stateId = 29;
+			}else if (location.equalsIgnoreCase("Jharkhand")) {
+				stateId = 30;
+			}else if (location.equalsIgnoreCase("Navapur")) {
+				stateId = 31;
+			}else if (location.equalsIgnoreCase("Panipat")) {
+				stateId = 32;
+			}else if (location.equalsIgnoreCase("Pathankot")) {
+				stateId = 33;
+			}else if (location.equalsIgnoreCase("Punjab")) {
+				stateId = 34;
+			}else if (location.equalsIgnoreCase("Sangrur")) {
+				stateId = 35;
+			}else if (location.equalsIgnoreCase("Uttar Pradesh")) {
+				stateId = 36;
+			}else if (location.equalsIgnoreCase("Rajasthan")) {
+				stateId = 37;
+			}else if (location.equalsIgnoreCase("Bhopal")) {
+				stateId = 38;
+			}else if (location.equalsIgnoreCase("Malegaon")) {
+				stateId = 39;
+			}else if (location.equalsIgnoreCase("Nasik")) {
+				stateId = 40;
+			}else if (location.equalsIgnoreCase("Indore")) {
+				stateId = 41;
+			}
+
+		
+		}
+		return stateId;
+	}
+	public static int state_loading(String location) 
+	{
+		 int stateId = 0;
+				if (location != null) {
+					if (location.equalsIgnoreCase("Bengaluru")) {
+						stateId = 1;
+					} else if (location.equalsIgnoreCase("Namakkal")) {
+						stateId = 2;
+					} else if (location.equalsIgnoreCase("Hospet")) {
+						stateId = 3;
+					} else if (location.equalsIgnoreCase("Mysuru")) {
+						stateId = 4;
+					} else if (location.equalsIgnoreCase("Mangalore")) {
+						stateId = 5;
+					} else if (location.equalsIgnoreCase("Hyderabad")) {
+						stateId = 6;
+					} else if (location.equalsIgnoreCase("Jabalpur")) {
+						stateId = 7;
+					} else if (location.equalsIgnoreCase("Pune")) {
+						stateId = 8;
+					} else if (location.equalsIgnoreCase("Ahmedabad")) {
+						stateId = 9;
+					} else if (location.equalsIgnoreCase("Ajmer")) {
+						stateId = 10;
+					} else if (location.equalsIgnoreCase("Brahmapur")) {
+						stateId = 11;
+					} else if (location.equalsIgnoreCase("Barwala")) {
+						stateId = 12;
+					} else if (location.equalsIgnoreCase("Chennai")) {
+						stateId = 13;
+					} else if (location.equalsIgnoreCase("Chittor")) {
+						stateId = 14;
+					} else if (location.equalsIgnoreCase("Delhi")) {
+						stateId = 15;
+					} else if (location.equalsIgnoreCase("E.Godavari")) {
+						stateId = 16;
+					} else if (location.equalsIgnoreCase("Kolkata")) {
+						stateId = 17;
+					} else if (location.equalsIgnoreCase("Ludhiana")) {
+						stateId = 18;
+					} else if (location.equalsIgnoreCase("Mumbai")) {
+						stateId = 19;
+					} else if (location.equalsIgnoreCase("Raipur")) {
+						stateId = 20;
+					} else if (location.equalsIgnoreCase("Surat")) {
+						stateId = 21;
+					} else if (location.equalsIgnoreCase("Vijayawada")) {
+						stateId = 22;
+					} else if (location.equalsIgnoreCase("Vizag")) {
+						stateId = 23;
+					} else if (location.equalsIgnoreCase("W.Godavari")) {
+						stateId = 24;
+					} else if (location.equalsIgnoreCase("Warangal")) {
+						stateId = 25;
+					} else if (location.equalsIgnoreCase("Patna")) {
+						stateId = 26;
+					}else if (location.equalsIgnoreCase("Anand")) {
+						stateId = 27;
+					}else if (location.equalsIgnoreCase("Godavari")) {
+						stateId = 28;
+					}else if (location.equalsIgnoreCase("Karnal")) {
+						stateId = 29;
+					}else if (location.equalsIgnoreCase("Jharkhand")) {
+						stateId = 30;
+					}else if (location.equalsIgnoreCase("Navapur")) {
+						stateId = 31;
+					}else if (location.equalsIgnoreCase("Panipat")) {
+						stateId = 32;
+					}else if (location.equalsIgnoreCase("Pathankot")) {
+						stateId = 33;
+					}else if (location.equalsIgnoreCase("Punjab")) {
+						stateId = 34;
+					}else if (location.equalsIgnoreCase("Sangrur")) {
+						stateId = 35;
+					}else if (location.equalsIgnoreCase("Uttar Pradesh")) {
+						stateId = 36;
+					}else if (location.equalsIgnoreCase("Rajasthan")) {
+						stateId = 37;
+					}else if (location.equalsIgnoreCase("Bhopal")) {
+						stateId = 38;
+					}
+
+				}
+		return stateId;
+		
+	}
+	public static int state_paper(String location) 
+	{
+        int stateId = 0;
+		if (location != null) {
+			if (location.equalsIgnoreCase("Bengaluru")) {
+				stateId = 1;
+			} else if (location.equalsIgnoreCase("Namakkal")) {
+				stateId = 2;
+			} else if (location.equalsIgnoreCase("Hospet")) {
+				stateId = 3;
+			} else if (location.equalsIgnoreCase("Mysuru")) {
+				stateId = 4;
+			} else if (location.equalsIgnoreCase("Mangalore")) {
+				stateId = 5;
+			} else if (location.equalsIgnoreCase("Hyderabad")||location.equalsIgnoreCase("Hyderabad NECC")) {
+				stateId = 6;
+			} else if (location.equalsIgnoreCase("Jabalpur")) {
+				stateId = 7;
+			} else if (location.equalsIgnoreCase("Pune")) {
+				stateId = 8;
+			} else if (location.equalsIgnoreCase("Ahmedabad")) {
+				stateId = 9;
+			} else if (location.equalsIgnoreCase("Ajmer")) {
+				stateId = 10;
+			} else if (location.equalsIgnoreCase("Brahampur")||location.equalsIgnoreCase("Brahmapur")) {
+				stateId = 11;
+			} else if (location.equalsIgnoreCase("Barwala")||location.equalsIgnoreCase("BFTA Barwala")) {
+				stateId = 12;
+			} else if (location.equalsIgnoreCase("Chennai")) {
+				stateId = 13;
+			} else if (location.equalsIgnoreCase("Chittor")) {
+				stateId = 14;
+			} else if (location.equalsIgnoreCase("Delhi")) {
+				stateId = 15;
+			} else if (location.equalsIgnoreCase("E.Godavari")) {
+				stateId = 16;
+			} else if (location.equalsIgnoreCase("Kolkata")) {
+				stateId = 17;
+			} else if (location.equalsIgnoreCase("Ludhiana")) {
+				stateId = 18;
+			} else if (location.equalsIgnoreCase("Mumbai")) {
+				stateId = 19;
+			} else if (location.equalsIgnoreCase("Raipur")) {
+				stateId = 20;
+			} else if (location.equalsIgnoreCase("Surat")) {
+				stateId = 21;
+			} else if (location.equalsIgnoreCase("Vijayawada")) {
+				stateId = 22;
+			} else if (location.equalsIgnoreCase("Vizag")) {
+				stateId = 23;
+			} else if (location.equalsIgnoreCase("W.Godavari")) {
+				stateId = 24;
+			} else if (location.equalsIgnoreCase("Warangal")) {
+				stateId = 25;
+			} else if (location.equalsIgnoreCase("Patna")) {
+				stateId = 26;
+			}
+
+		}
+		return stateId;
+		
+	}
+
+
+}

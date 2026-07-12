@@ -1,0 +1,32 @@
+package com.poultry;
+
+public class Globalconstant 
+{
+
+	   public static String WebUrl= "https://web.whatsapp.com/";
+
+//	Local
+public static String tradingLayerMainGroup= " POULTRY INDUSTRY LATEST ";
+public static String tradingLayerForwardGroup= "Trading Layer Prices";
+public static String Db_Url= "jdbc:mysql://poultry.sunfra.in:3306/sunfra_poultry";
+public static String Db_User= "sunfra_poultry";
+public static String Db_PWD= "VWB7K2JSLLEPSPO2V2";
+public static String tradingBroilerMainGroup="POULTRY INDUSTRY BROILER RATES" ;
+public static String tradingBroilerForwardGroup="Trading Broiler Prices" ;
+public static String WhatsappCookies="C:\\Users\\Vinay server 3\\eclipse-workspace\\userdata\\userdata2" ;
+public static String domain_Url="http://poultry.sunfra.in";
+
+
+
+//LIVE
+//public static String tradingLayerGroup= "POULTRY INDUSTRY LATEST";
+//public static String Db_Url= "jdbc:mysql://poultry.sunfra.in:3306/sunfra_poultry";
+//public static String Db_User= "sunfra_poultry";
+//public static String Db_PWD= "VWB7K2JSLLEPSPO2V2";
+// public static String tradingBroilerGroup="POULTRY INDUSTRY BROILER RATES" ;
+
+
+
+
+
+}

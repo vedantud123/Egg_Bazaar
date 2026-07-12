@@ -1,0 +1,18 @@
+[8536:11576:1111/104240.146:WARNING:chrome_main_delegate.cc(744)] This is Chrome version 130.0.6723.117 (not a warning)
+[8536:11576:1111/104240.275:INFO:chrome_browser_cloud_management_controller.cc(196)] No machine level policy manager exists.
+[3412:17160:1111/104240.480:WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+[3412:13564:1111/104246.436:WARNING:angle_platform_impl.cc(49)] HLSLCompiler.cpp:250 (rx::HLSLCompiler::compileToBinary): 
+C:\fakepath(130,3-70): warning X3557: loop only executes for 1 iteration(s), forcing loop to unroll
+
+[8536:7024:1111/104247.175:ERROR:cpu_probe_win.cc(112)] PdhAddEnglishCounter failed: Error (0x13D) while retrieving error. (0xC0000BB8)
+[8536:11576:1111/104248.908:INFO:CONSOLE(154)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v3/yf/r/TZ381arD_dv.js (154)
+[8536:11576:1111/104255.384:WARNING:controller_impl.cc(1192)] Background download complete, client: 6, completion type: 0, file size:5157
+[8536:11576:1111/104255.384:WARNING:controller_impl.cc(1192)] Background download complete, client: 6, completion type: 0, file size:265059
+[8536:11576:1111/104256.181:WARNING:controller_impl.cc(1192)] Background download complete, client: 6, completion type: 0, file size:883094
+[8536:11576:1111/104256.288:WARNING:controller_impl.cc(1192)] Background download complete, client: 6, completion type: 0, file size:2200227
+[8536:11576:1111/104256.636:WARNING:controller_impl.cc(1192)] Background download complete, client: 6, completion type: 0, file size:45171
+[8536:11576:1111/104257.409:WARNING:controller_impl.cc(1192)] Background download complete, client: 6, completion type: 0, file size:4680
+[8536:11576:1111/104257.521:WARNING:controller_impl.cc(1192)] Background download complete, client: 6, completion type: 0, file size:2747168
+[8536:11576:1111/104258.940:WARNING:controller_impl.cc(1192)] Background download complete, client: 6, completion type: 0, file size:118577
+[8536:11576:1111/104307.156:WARNING:controller_impl.cc(1192)] Background download complete, client: 6, completion type: 0, file size:68666027
+[3412:17160:1111/104327.183:ERROR:shared_image_manager.cc(248)] SharedImageManager::ProduceSkia: Trying to Produce a Skia representation from a non-existent mailbox.

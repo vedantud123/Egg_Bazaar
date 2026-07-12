@@ -1,0 +1,29 @@
+2025/10/22-18:40:03.061 28b0 Reusing MANIFEST C:\Users\Vinay server 3\eclipse-workspace\vedant\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/10/22-18:40:03.061 28b0 Recovering log #750
+2025/10/22-18:40:03.080 28b0 Reusing old log C:\Users\Vinay server 3\eclipse-workspace\vedant\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000750.log 
+2025/10/22-18:40:03.081 28b0 Delete type=2 #737
+2025/10/22-18:40:03.081 28b0 Delete type=2 #738
+2025/10/22-18:40:03.081 28b0 Delete type=2 #739
+2025/10/22-18:40:03.081 28b0 Delete type=2 #740
+2025/10/22-18:40:03.081 28b0 Delete type=2 #741
+2025/10/22-18:40:03.081 28b0 Delete type=2 #742
+2025/10/22-18:40:03.081 28b0 Delete type=2 #743
+2025/10/22-18:40:03.081 28b0 Delete type=2 #744
+2025/10/22-18:40:03.082 28b0 Delete type=2 #745
+2025/10/22-18:40:03.082 28b0 Delete type=2 #752
+2025/10/22-18:40:04.649 28b0 Level-0 table #764: started
+2025/10/22-18:40:04.743 28b0 Level-0 table #764: 751771 bytes OK
+2025/10/22-18:40:04.765 28b0 Delete type=0 #750
+2025/10/22-18:40:04.766 28b0 Manual compaction at level-0 from '\x00f\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00g\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/10/22-18:40:05.945 2c0c Compacting 1@1 + 9@2 files
+2025/10/22-18:40:06.136 2c0c Generated table #765@1: 87806 keys, 2239346 bytes
+2025/10/22-18:40:06.330 2c0c Generated table #766@1: 53338 keys, 2713413 bytes
+2025/10/22-18:40:06.466 2c0c Generated table #767@1: 28557 keys, 2206153 bytes
+2025/10/22-18:40:06.614 2c0c Generated table #768@1: 771 keys, 2130453 bytes
+2025/10/22-18:40:06.799 2c0c Generated table #769@1: 22737 keys, 2221662 bytes
+2025/10/22-18:40:06.933 2c0c Generated table #770@1: 6811 keys, 2128755 bytes
+2025/10/22-18:40:07.091 2c0c Generated table #771@1: 59126 keys, 2196423 bytes
+2025/10/22-18:40:07.283 2c0c Generated table #772@1: 113384 keys, 2268253 bytes
+2025/10/22-18:40:07.367 2c0c Generated table #773@1: 14357 keys, 292051 bytes
+2025/10/22-18:40:07.367 2c0c Compacted 1@1 + 9@2 files => 18396509 bytes
+2025/10/22-18:40:07.407 2c0c compacted to: files[ 0 0 9 0 0 0 0 ]

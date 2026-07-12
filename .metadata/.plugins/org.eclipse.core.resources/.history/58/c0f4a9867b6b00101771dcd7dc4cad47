@@ -1,0 +1,496 @@
+ //package com.gowtham.selenium;
+//
+//import java.sql.SQLException;
+//import java.time.Duration;
+//import java.util.List;
+//import org.openqa.selenium.By;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.support.ui.ExpectedConditions;
+//import org.openqa.selenium.support.ui.WebDriverWait;
+//import org.openqa.selenium.JavascriptExecutor;
+//
+//public class LaunchIDPWebsite {
+//    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//        WebDriver driver = new ChromeDriver();
+//        driver.manage().window().maximize();
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//        try {
+//            driver.get("https://www.idp.com/india/");
+//           // driver.get("https://www.idp.com/find-a-course/?page=60");
+//
+//            
+//            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='Find a course']"))).click();
+//            driver.get("https://www.idp.com/find-a-course/?page=422");
+//
+//
+//            int currentPage = 1;
+//            int maxPages = 19515;
+//           // int courseCounter = 0;
+//
+//            while (currentPage <= maxPages) {
+//                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'View details')]")));
+//                List<WebElement> courseLinks = driver.findElements(By.xpath("//a[contains(text(),'View details')]"));
+//
+////                for (int i = 0; i < courseLinks.size(); i++) {
+////                    courseCounter++;
+////                    if (courseCounter <= 719) {
+////                        continue;
+////                    }
+//             for (int i = 0; i < courseLinks.size(); i++) {
+//                    List<WebElement> updatedCourseLinks = driver.findElements(By.xpath("//a[contains(text(),'View details')]"));
+//                    WebElement course = updatedCourseLinks.get(i);
+//                    String originalWindow = driver.getWindowHandle();
+//
+//                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", course);
+//                    wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+//
+//                    for (String windowHandle : driver.getWindowHandles()) {
+//                        if (!windowHandle.equals(originalWindow)) {
+//                            driver.switchTo().window(windowHandle);
+//                            break;
+//                        }
+//                    }
+//
+//                    wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
+//                    String courseMainTitle = driver.findElement(By.tagName("h1")).getText();
+//
+//                    String universityName;
+//                    try {
+//                        WebElement universityElement = driver.findElement(By.xpath("//h1/following-sibling::h2[1]/a"));
+//                        universityName = universityElement.getText();
+//                    } catch (Exception e) {
+//                        universityName = "University info not available";
+//                    }
+//
+//                    String courseTitle = courseMainTitle;
+//                    if (!"University info not available".equals(universityName) && !universityName.isEmpty()) {
+//                        courseTitle = courseMainTitle + " " + universityName;
+//                    }
+//
+//                    String qualification;
+//                    try {
+//                        qualification = wait.until(ExpectedConditions
+//                                .visibilityOfElementLocated(By.xpath("//p[contains(text(),'Qualification')]/following-sibling::p[1]")))
+//                                .getText();
+//                    } catch (Exception e) {
+//                        qualification = "Qualification info not available";
+//                    }
+//
+//                    String location;
+//                    try {
+//                        location = wait.until(ExpectedConditions
+//                                .visibilityOfElementLocated(By.xpath("//p[text()='Location']/following-sibling::p[1]")))
+//                                .getText();
+//                    } catch (Exception e) {
+//                        location = "Location info not available";
+//                    }
+//
+//                    List<WebElement> feeElements = driver.findElements(By.xpath("//p[text()='Fees']/following-sibling::p"));
+//                    StringBuilder fees = new StringBuilder();
+//                    for (WebElement element : feeElements) {
+//                        fees.append(element.getText()).append(" ");
+//                    }
+//
+//                    String duration;
+//                    try {
+//                        WebElement durationElement = driver.findElement(By.xpath("//p[text()='Duration']/following-sibling::p[1]"));
+//                        duration = durationElement.getText().replace("(s)", "").trim().replaceAll("\\s+", " ");
+//                    } catch (Exception e) {
+//                        duration = "Duration info not available";
+//                    }
+//
+//                    String intake;
+//                    try {
+//                        WebElement intakeElement = driver.findElement(By.xpath("//p[text()='Next intake']/following-sibling::p[1]"));
+//                        intake = intakeElement.getText().trim();
+//                    } catch (Exception e) {
+//                        intake = "Intake info not available";
+//                    }
+//
+//                    String score;
+//                    try {
+//                        WebElement scoreValue = driver.findElement(By.xpath("//p[text()='Entry Score']/following-sibling::p[1]"));
+//                        WebElement scoreType = driver.findElement(By.xpath("//p[text()='Entry Score']/following-sibling::span[1]"));
+//                        score = scoreValue.getText().trim() + " " + scoreType.getText().trim();
+//                    } catch (Exception e) {
+//                        score = "Entry Score info not available";
+//                    }
+//
+//                    String aboutCourseInfo;
+//                    try {
+//                        WebElement aboutCourseDiv = wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                                By.xpath("//div[contains(@class, 'faq-content') and contains(@class, 'rich-text-format')]")));
+//                        String rawAboutCourseText = aboutCourseDiv.getText();
+//                        aboutCourseInfo = rawAboutCourseText
+//                                .replace("Scholarships View all scholarships", "")
+//                                .replace("Internships", "")
+//                                .trim();
+//                        if (aboutCourseInfo.isEmpty() || aboutCourseInfo.trim().length() < 50) {
+//                            aboutCourseInfo = "About the course info not available (cleaned)";
+//                        }
+//                    } catch (Exception e) {
+//                        aboutCourseInfo = "About the course info not available (error during extraction)";
+//                    }
+//
+//                    SQL.storeCourseToDatabase(courseTitle, location, qualification, fees.toString().trim(), duration, intake, score, aboutCourseInfo);
+//
+//                    driver.close();
+//                    driver.switchTo().window(originalWindow);
+//                }
+//                
+//                currentPage++;
+//
+//                try {
+//                    WebElement nextPage = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='Go to next page']")));
+//                    nextPage.click();
+//                } catch (Exception e) {
+//                    break;
+//                }
+//            }
+//        } finally {
+//            if (driver != null) {
+//                driver.quit();
+//            }
+//        }
+//    }
+//}
+////package com.gowtham.selenium;
+////
+////import java.sql.SQLException;
+////import java.time.Duration;
+////import java.util.List;
+////import org.openqa.selenium.By;
+////import org.openqa.selenium.WebDriver;
+////import org.openqa.selenium.WebElement;
+////import org.openqa.selenium.chrome.ChromeDriver;
+////import org.openqa.selenium.support.ui.ExpectedConditions;
+////import org.openqa.selenium.support.ui.WebDriverWait;
+////import org.openqa.selenium.JavascriptExecutor;
+////
+////public class LaunchIDPWebsite {
+////    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+////        WebDriver driver = new ChromeDriver();
+////        driver.manage().window().maximize();
+////        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+////
+////        try {
+////            driver.get("https://www.idp.com/india/");
+////            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='Find a course']"))).click();
+////
+////            int currentPage = 1;
+////            int maxPages = 19515;
+////            int courseCounter = 0;
+////            int skipCourses = 719;
+////
+////            while (currentPage <= maxPages) {
+////                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'View details')]")));
+////                List<WebElement> courseLinks = driver.findElements(By.xpath("//a[contains(text(),'View details')]"));
+////
+////                for (int i = 0; i < courseLinks.size(); i++) {
+////                    courseCounter++;
+////                    if (courseCounter <= skipCourses) {
+////                        continue;
+////                    }
+////
+////                    System.out.println("Processing course #" + courseCounter);
+////
+////                    List<WebElement> updatedCourseLinks = driver.findElements(By.xpath("//a[contains(text(),'View details')]"));
+////                    WebElement course = updatedCourseLinks.get(i);
+////                    String originalWindow = driver.getWindowHandle();
+////
+////                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", course);
+////                    wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+////
+////                    for (String windowHandle : driver.getWindowHandles()) {
+////                        if (!windowHandle.equals(originalWindow)) {
+////                            driver.switchTo().window(windowHandle);
+////                            break;
+////                        }
+////                    }
+////
+////                    wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
+////                    String courseMainTitle = driver.findElement(By.tagName("h1")).getText();
+////
+////                    String universityName;
+////                    try {
+////                        WebElement universityElement = driver.findElement(By.xpath("//h1/following-sibling::h2[1]/a"));
+////                        universityName = universityElement.getText();
+////                    } catch (Exception e) {
+////                        universityName = "University info not available";
+////                    }
+////
+////                    String courseTitle = courseMainTitle;
+////                    if (!"University info not available".equals(universityName) && !universityName.isEmpty()) {
+////                        courseTitle = courseMainTitle + " " + universityName;
+////                    }
+////
+////                    String qualification;
+////                    try {
+////                        qualification = wait.until(ExpectedConditions
+////                                .visibilityOfElementLocated(By.xpath("//p[contains(text(),'Qualification')]/following-sibling::p[1]")))
+////                                .getText();
+////                    } catch (Exception e) {
+////                        qualification = "Qualification info not available";
+////                    }
+////
+////                    String location;
+////                    try {
+////                        location = wait.until(ExpectedConditions
+////                                .visibilityOfElementLocated(By.xpath("//p[text()='Location']/following-sibling::p[1]")))
+////                                .getText();
+////                    } catch (Exception e) {
+////                        location = "Location info not available";
+////                    }
+////
+////                    List<WebElement> feeElements = driver.findElements(By.xpath("//p[text()='Fees']/following-sibling::p"));
+////                    StringBuilder fees = new StringBuilder();
+////                    for (WebElement element : feeElements) {
+////                        fees.append(element.getText()).append(" ");
+////                    }
+////
+////                    String duration;
+////                    try {
+////                        WebElement durationElement = driver.findElement(By.xpath("//p[text()='Duration']/following-sibling::p[1]"));
+////                        duration = durationElement.getText().replace("(s)", "").trim().replaceAll("\\s+", " ");
+////                    } catch (Exception e) {
+////                        duration = "Duration info not available";
+////                    }
+////
+////                    String intake;
+////                    try {
+////                        WebElement intakeElement = driver.findElement(By.xpath("//p[text()='Next intake']/following-sibling::p[1]"));
+////                        intake = intakeElement.getText().trim();
+////                    } catch (Exception e) {
+////                        intake = "Intake info not available";
+////                    }
+////
+////                    String score;
+////                    try {
+////                        WebElement scoreValue = driver.findElement(By.xpath("//p[text()='Entry Score']/following-sibling::p[1]"));
+////                        WebElement scoreType = driver.findElement(By.xpath("//p[text()='Entry Score']/following-sibling::span[1]"));
+////                        score = scoreValue.getText().trim() + " " + scoreType.getText().trim();
+////                    } catch (Exception e) {
+////                        score = "Entry Score info not available";
+////                    }
+////
+////                    String aboutCourseInfo;
+////                    try {
+////                        WebElement aboutCourseDiv = wait.until(ExpectedConditions.visibilityOfElementLocated(
+////                                By.xpath("//div[contains(@class, 'faq-content') and contains(@class, 'rich-text-format')]")));
+////                        String rawAboutCourseText = aboutCourseDiv.getText();
+////                        aboutCourseInfo = rawAboutCourseText
+////                                .replace("Scholarships View all scholarships", "")
+////                                .replace("Internships", "")
+////                                .trim();
+////                        if (aboutCourseInfo.isEmpty() || aboutCourseInfo.trim().length() < 50) {
+////                            aboutCourseInfo = "About the course info not available (cleaned)";
+////                        }
+////                    } catch (Exception e) {
+////                        aboutCourseInfo = "About the course info not available (error during extraction)";
+////                    }
+////
+////                    SQL.storeCourseToDatabase(courseTitle, location, qualification, fees.toString().trim(),
+////                            duration, intake, score, aboutCourseInfo);
+////
+////                    try {
+////                        driver.close();
+////                    } catch (Exception e) {
+////                        System.out.println("Error closing tab: " + e.getMessage());
+////                    }
+////                    driver.switchTo().window(originalWindow);
+////                }
+////
+////                currentPage++;
+////                try {
+////                    WebElement nextPage = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label='Go to next page']")));
+////                    nextPage.click();
+////                } catch (Exception e) {
+////                    System.out.println("Next page not found or end reached.");
+////                    break;
+////                }
+////            }
+////        } finally {
+////            if (driver != null) {
+////                driver.quit();
+////            }
+////        }
+////    }
+////}
+
+
+package com.gowtham.selenium;
+
+import java.sql.SQLException;
+import java.time.Duration;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
+
+public class LaunchIDPWebsite {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            driver.get("https://www.idp.com/india/");
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='Find a course']"))).click();
+            driver.get("https://www.idp.com/find-a-course/?page=15354");
+
+            int currentPage = 15354;
+            int maxPages = 20000;
+
+            while (currentPage <= maxPages) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'View details')]")));
+                List<WebElement> courseLinks = driver.findElements(By.xpath("//a[contains(text(),'View details')]"));
+
+                for (int i = 0; i < courseLinks.size(); i++) {
+                    List<WebElement> updatedCourseLinks = driver.findElements(By.xpath("//a[contains(text(),'View details')]"));
+                    WebElement course = updatedCourseLinks.get(i);
+                    String originalWindow = driver.getWindowHandle();
+
+                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", course);
+                    wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+
+                    for (String windowHandle : driver.getWindowHandles()) {
+                        if (!windowHandle.equals(originalWindow)) {
+                            driver.switchTo().window(windowHandle);
+                            break;
+                        }
+                    }
+
+                    String courseMainTitle;
+                    try {
+                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
+                        courseMainTitle = driver.findElement(By.tagName("h1")).getText();
+                    } catch (Exception e) {
+                        System.out.println("❌ h1 tag not visible. Skipping...");
+                        driver.close();
+                        driver.switchTo().window(originalWindow);
+                        continue;
+                    }
+
+                    String universityName;
+                    try {
+                        universityName = driver.findElement(By.xpath("//h1/following-sibling::h2[1]/a")).getText();
+                    } catch (Exception e) {
+                        universityName = "University info not available";
+                    }
+
+                    String courseTitle = !"University info not available".equals(universityName) && !universityName.isEmpty()
+                            ? courseMainTitle + " " + universityName
+                            : courseMainTitle;
+
+                    String qualification;
+                    try {
+                        qualification = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath("//p[contains(text(),'Qualification')]/following-sibling::p[1]"))).getText();
+                    } catch (Exception e) {
+                        qualification = "Qualification info not available";
+                    }
+
+                    String location;
+                    try {
+                        location = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath("//p[text()='Location']/following-sibling::p[1]"))).getText();
+                    } catch (Exception e) {
+                        location = "Location info not available";
+                    }
+
+                    StringBuilder fees = new StringBuilder();
+                    try {
+                        List<WebElement> feeElements = driver.findElements(By.xpath("//p[text()='Fees']/following-sibling::p"));
+                        for (WebElement element : feeElements) {
+                            fees.append(element.getText()).append(" ");
+                        }
+                    } catch (Exception e) {
+                        fees.append("Fees info not available");
+                    }
+
+                    String duration;
+                    try {
+                        WebElement durationElement = driver.findElement(By.xpath("//p[text()='Duration']/following-sibling::p[1]"));
+                        duration = durationElement.getText().replace("(s)", "").trim().replaceAll("\\s+", " ");
+                    } catch (Exception e) {
+                        duration = "Duration info not available";
+                    }
+
+                    String intake;
+                    try {
+                        WebElement intakeElement = driver.findElement(By.xpath("//p[text()='Next intake']/following-sibling::p[1]"));
+                        intake = intakeElement.getText().trim();
+                    } catch (Exception e) {
+                        intake = "Intake info not available";
+                    }
+
+                    String score;
+                    try {
+                        WebElement scoreValue = driver.findElement(By.xpath("//p[text()='Entry Score']/following-sibling::p[1]"));
+                        WebElement scoreType = driver.findElement(By.xpath("//p[text()='Entry Score']/following-sibling::span[1]"));
+                        score = scoreValue.getText().trim() + " " + scoreType.getText().trim();
+                    } catch (Exception e) {
+                        score = "Entry Score info not available";
+                    }
+
+                    String aboutCourseInfo;
+                    try {
+                        WebElement aboutCourseDiv = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath("//div[contains(@class, 'faq-content') and contains(@class, 'rich-text-format')]")));
+                        String rawText = aboutCourseDiv.getText().replace("Scholarships View all scholarships", "")
+                                .replace("Internships", "").trim();
+                        aboutCourseInfo = (rawText.length() < 50)
+                                ? "About the course info not available (cleaned)"
+                                : rawText;
+                    } catch (Exception e) {
+                        aboutCourseInfo = "About the course info not available (error during extraction)";
+                    }
+
+                    SQL.storeCourseToDatabase(
+                            courseTitle, location, qualification, fees.toString().trim(),
+                            duration, intake, score, aboutCourseInfo
+                    );
+
+                    driver.close();
+                    driver.switchTo().window(originalWindow);
+                }
+
+//                currentPage++;
+//                try {
+//                    WebElement nextPage = wait.until(ExpectedConditions.elementToBeClickable(
+//                            By.xpath("//a[@aria-label='Go to next page']")));
+//                    nextPage.click();
+//                } catch (Exception e) {
+//                    System.out.println("Next page not found or end reached.");
+//                    break;
+//                }
+                
+                System.out.println("✅ Finished scraping page: " + currentPage + " | URL: " + driver.getCurrentUrl());
+                currentPage++;
+                try {
+                    WebElement nextPage = wait.until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//a[@aria-label='Go to next page']")));
+                    nextPage.click();
+                } catch (Exception e) {
+                    System.out.println("⛔ Next page not found or end reached at page: " + (currentPage - 1));
+                    System.out.println("🛑 Last working URL: " + driver.getCurrentUrl());
+                   
+                    break;
+                }
+
+            }
+        } finally {
+            if (driver != null) {
+                driver.quit();
+            }
+        }
+    }
+}
+

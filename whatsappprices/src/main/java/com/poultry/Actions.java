@@ -1,0 +1,160 @@
+package com.poultry;
+
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Actions
+{
+	static int maxWaitingTime =120;
+
+	public static void waittill(int time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void LoadUrl(WebDriver driver, String url) {
+		driver.get(url);
+		Actions.waittill(5000);
+	}
+	
+	public static int getSize(WebDriver driver,By by) {
+		try {	
+			return driver.findElements(by).size();
+			} catch(Exception e) {
+				return 0;
+			}
+		}
+	public static String getText(WebDriver driver, By by) {
+		try {
+			return driver.findElement(by).getText().trim();
+		} catch (Exception e) {
+			return "";
+		}
+	}
+	
+	 public static void click(WebDriver driver,By by) {
+		driver.findElement(by).click();
+	 }
+	 
+	 public static void sendKeys(WebDriver driver, By by, String data) {
+		 try {
+		 driver.findElement(by).sendKeys(data);
+		 }catch(Exception e) {
+			 
+		 }
+	 }
+	 public static void log(WebDriver driver, String message) {
+			String pageURL = driver.getCurrentUrl();
+			StackTraceElement caller = new Throwable().getStackTrace()[1];
+			String callerInfo = caller.getClassName() + " " + caller.getMethodName() + " line " + caller.getLineNumber();
+			Calendar cal = Calendar.getInstance();
+			cal.getTime();
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+			System.out.print("--->" + sdf.format(cal.getTime()) + " ");
+			System.out.print("--->" + pageURL);
+			System.out.println(callerInfo + " | " + message);
+	 }
+	 
+	 public static void new_tab(WebDriver driver,String url) {
+		 ((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+			for (String windowHandle : driver.getWindowHandles()) {
+				driver.switchTo().window(windowHandle);
+			}
+			driver.get(url);
+			Actions.waittill(4000);
+			driver.close();
+			driver.switchTo().window(driver.getWindowHandles().iterator().next());
+	 }
+
+	 public static String url(WebDriver driver,String data,String state_id,String load_status,String price,String date) {
+		 if(date.equals("date=null")) {
+			 String url=Globalconstant.domain_Url+"/"+data+"?"+state_id+"&"+load_status+"&"+price;
+			 System.out.println(url);
+			 new_tab(driver, url);
+			 return url;
+		 }
+		 else {
+			 String url=Globalconstant.domain_Url+"/"+data+"?"+state_id+"&"+load_status+"&"+price+"&"+date;
+			 System.out.println(url);
+			 new_tab(driver, url);
+			 return url;
+		 }
+	 }
+	 
+	 public static String time(WebDriver driver) {
+		Actions.waittill(6000);
+		String time=driver.findElement(By.xpath("(//span[@class='x1rg5ohu x16dsc37'])[1]")).getText();
+		System.out.println(time);
+		return time.replace("Edited", "").trim();
+	 }
+	 
+	 public static void delete_msg(WebDriver driver) {
+		 	Actions.waittill(6000);
+		 	List<WebElement>  messagseCount = driver.findElements(By.xpath("//div[contains(@class,'message-in' )]/div[1]"));
+		 	Actions.waittill(6000);
+		 	int count=messagseCount.size();
+		 	System.out.println("Total count is :"+count);
+	 
+		 	if(count!=0) {
+		 		Actions.waittill(3000);
+		 		int cn=0;
+		 		int deleted_messCount=0;
+		 		for (WebElement webElement : messagseCount) {
+		 				String text=webElement.getText();				
+		 				if(text.contains("This message was deleted")) {
+		 					Actions.waittill(2000);
+		 					Common_Method.select_msg(driver);
+		 					Actions.waittill(2000);
+		 					Actions.click(driver, By.xpath("//div[contains(text(),'This message was deleted')]/../../../../../..//div[@aria-hidden='true']"));
+		 					Actions.waittill(2000);
+		 					Common_Method.delete_met(driver);
+		 					deleted_messCount++;
+		 				}
+		 				else {
+		 					Actions.waittill(3000);
+		 					cn++;
+		 				}
+		 		}
+		 		System.out.println("The count of message is "+cn);
+		 		System.out.println("The deleted message count is "+deleted_messCount);	
+		 	} 	
+	 }
+	 
+	 public static String formatteddate() {
+		LocalDate currentDate = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+		String formattedDate = currentDate.format(formatter);
+		System.out.println(formattedDate);
+		return formattedDate;
+	 }
+	 
+	 public static void check_readmore(WebDriver driver) {
+		boolean check=true;
+		while (check) {
+				String readmore = Actions.getText(driver, By.xpath(
+						"(//div[contains(@class, 'message-in')]//div[contains(@class, 'read-more-button')])[1]"));
+				if (readmore.equals("Read more")) {
+					Actions.waittill(3000);
+					Actions.click(driver, By.xpath(
+							"(//div[contains(@class, 'message-in')]//div[contains(@class, 'read-more-button')])[1]"));
+				} else {
+					break;
+				}
+		}
+	 }
+}

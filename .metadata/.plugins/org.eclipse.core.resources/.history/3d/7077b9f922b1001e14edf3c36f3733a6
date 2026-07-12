@@ -1,0 +1,519 @@
+package com.poultry;
+
+import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.poultry.Database;
+import com.poultry.Actions;
+
+public class broiler_data {
+
+	
+	public static void webload(WebDriver driver) {
+		
+		Actions.waittill(5000);
+		Actions.click(driver, By.xpath("(//div[@role='textbox']//p)[1]"));
+		System.out.println("hello");
+		
+		Actions.waittill(7000);
+		
+		Actions.click(driver, By.xpath("//div//span//button[@aria-label='Cancel search']"));
+		
+		System.out.println("changed another group successfully");
+		Actions.waittill(5000);
+
+//		Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "Group vsj");
+		Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "POULTRY INDUSTRY BROILER RATES");
+//		Actions.waittill(5000);
+//		Actions.click(driver, By.xpath("//div//span//button[@aria-label='Cancel search']"));
+
+		Actions.waittill(10000);
+System.out.println("broiler ");
+
+//		Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'Group vsj')]"));
+		Actions.click(driver, By.xpath("//div[@class='_21S-L']//span//span[@class='matched-text _11JPr']"));
+System.out.println("in");
+
+//		driver.findElement(By.xpath(""))
+		Actions.waittill(10000);
+	}
+	
+	public static int Broiler_ScrapMessage(WebDriver driver) throws ClassNotFoundException, SQLException {
+		int messageCount =0;
+		// TODO Auto-generated method stub
+//		Connection connection = Database.con();
+		LocalDate currentDate = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		// Format the current date using the formatter
+		String formattedDate = currentDate.format(formatter);
+		// Print the formatted date
+		System.out.println(formattedDate);
+//		Actions.waittill(30000);
+		Actions.waittill(10000);
+
+		String xpathExpression = "//div[contains(@class, 'message-in')]//div[contains(@data-pre-plain-text,'"
+				+ formattedDate + "')]";
+		Actions.waittill(5000);
+
+		List<WebElement> todayMessages = driver.findElements(By.xpath(xpathExpression));
+
+		 messageCount = todayMessages.size();
+		System.out.println("Today's broiler message count: " + messageCount);
+		if(messageCount==0) 
+		{
+			driver.close();
+		}
+		
+		Actions.waittill(7000);
+		driver.findElement(By.xpath("//div[@class='_3vsRF']//div[@aria-label='Menu']/span")).click();
+		System.out.println("menu1");
+		Actions.waittill(9000);
+		driver.findElement(By.xpath("//li[@class='jScby Iaqxu FCS6Q']//div[contains(text(),'Select messages')]")).click();
+		System.out.println("select msgs1");
+		Actions.waittill(6000);
+		String xpathExpression1 = "//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='_30oSb']//div[@tabindex=-1]";
+	////	
+		Actions.waittill(5000);
+		List<WebElement> todayMessages1 = driver.findElements(By.xpath(xpathExpression1));
+	////////
+		int messagecount1 = todayMessages1.size();
+		System.out.println("checkboxcount: " + messagecount1);
+		int k;
+		for ( k = 1; k <= messagecount1; k++)
+	////////
+		{
+			Actions.waittill(8000);
+//////			
+			Actions.click(driver, By.xpath(
+					"(//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='_30oSb']//div[@tabindex=-1])[1]"));
+	////	
+			System.out.println("checkbox1");
+		}
+	////////	
+		System.out.println("forward");
+	////////
+		Actions.waittill(8000);
+		driver.findElement(By.xpath("(//div[@class='_2IUvV']//button[@type='button'])[4]")).click();
+		System.out.println("a");
+	////////	
+		Actions.waittill(5000);
+		Actions.sendKeys(driver, By.xpath("(//div[@class='_2vDPL']//div//div/p)[1]"), "Trading Broiler Prices");
+
+		System.out.println("a1");
+	//////
+		Actions.waittill(5000);
+//		driver.findElement(By.xpath("//div[@class='_199zF 3j691 2N1Gm']")).click();
+		driver.findElement(By.xpath("//div[@class='_199zF _3j691 _2N1Gm']")).click();
+	//
+//		div[@class='_199zF 3j691 2N1Gm']
+		System.out.println("a2");
+	//////
+		Actions.waittill(3000);
+		driver.findElement(By.xpath("//div[@class='lhggkp7q j2mzdvlq axi1ht8l mrtez2t4']//div/span")).click();
+		System.out.println("a3");
+	//////
+		Actions.waittill(9000);
+		Actions.click(driver, By.xpath("(//div[@role='textbox']//p)[1]"));
+		System.out.println("a4");
+	//////
+	////////	
+		Actions.waittill(6000);
+		Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "POULTRY INDUSTRY BROILER RATES");
+	//
+		System.out.println("a5");
+	////////
+		Actions.waittill(5000);
+//		Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'𝗧𝗥𝗬 𝗟𝗔𝗧𝗘𝗦𝗧')]"));
+		Actions.click(driver, By.xpath("//div[@class='_21S-L']//span//span[@class='matched-text _11JPr']"));
+
+		System.out.println("a6");
+		boolean check = true;
+		int i = 0;
+		
+//		String table_name = "wa_cull_bird";
+		String table_name = "whatsapp_msgs";
+		String brand="Vencobb";
+		
+		Actions.waittill(3000);
+//		ArrayList<String> messegeids = new ArrayList<String>();
+	Date currentDate1 = new Date();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String formattedDate1 = dateFormat.format(currentDate1);
+
+	// Declare ArrayLists to store state IDs and prices
+	ArrayList<Integer> stateIds = new ArrayList<>();
+	ArrayList<Integer> prices = new ArrayList<>();
+
+	for (i = 0; i < messageCount; i++) {
+
+		while (check) {
+			String readmore = Actions.getText(driver, By.xpath(
+					"(//div[contains(@class, 'message-in')]//div[contains(@class, 'read-more-button')])[1]"));
+
+			if (readmore.equals("Read more")) {
+				Actions.waittill(3000);
+				Actions.click(driver, By.xpath(
+						"(//div[contains(@class, 'message-in')]//div[contains(@class, 'read-more-button')])[1]"));
+			} else {
+				break;
+			}
+		}
+
+		String Message = Actions.getText(driver, By.xpath(
+				"(//div[@class='_3B19s']//div[contains(@class, 'message-in')]//span[contains(@class, 'selectable-text')])["
+						+ (i + 1) + "]"));
+//		String text = "𝗣𝗢𝗨𝗟𝗧𝗥𝗬 7366964640 📞 Bhusawal (MH) rate 540-10=530 for 3rd November";
+		Message=Message.replace("𝗣𝗢𝗨𝗟𝗧𝗥𝗬 𝗜𝗡𝗗𝗨𝗦𝗧𝗥𝗬", "POULTRY INDUSTRY");
+//		text=text.replace("𝗣𝗢𝗨𝗟𝗧𝗥𝗬 𝗜𝗡𝗗𝗨𝗦𝗧𝗥𝗬", "POULTRY INDUSTRY");
+//		System.out.println(Message);
+		try {
+			System.out.println(new String(Message.getBytes("UTF-8"), "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		System.out.println(Message);
+		String Group_name = "broiler";
+		
+		System.out.println("Group_name : " + Group_name);
+
+		Connection connection = Database.con();
+
+//		String insertSql1 = "INSERT INTO `poutry_testdb`.`method_testing` (message) VALUES (?)";
+		String insertSql1 = "INSERT INTO `sunfra_poultry`.`whatsapp_msgs` (group_name,message,posted_date) VALUES (?,?,?)";
+
+		try (PreparedStatement ps = connection.prepareStatement(insertSql1)) {
+			System.out.println("entered BROILER DB");
+			ps.setString(1, Group_name);
+			ps.setString(2,Message );
+			ps.setString(3,formattedDate1);
+//			System.out.println(Message);
+
+			ps.executeUpdate();
+//			System.out.println("abcd");
+
+			System.out.println("successfull");
+			ps.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		Actions.waittill(3000);
+
+		if(Message.contains("Vencobb")) {
+			if(Message.contains("Karnataka")||Message.contains("Andhra Pardesh")||Message.contains("Telangana")||Message.contains("Tamil Nadu")) {
+				
+			}else {
+				continue;
+			}
+			if(Message.contains("Kerala")) {
+				continue;
+			}
+//		System.out.println("done with cull db");
+		String[] lines = Message.split("\n");	
+		
+		if (Message.contains("Rate for ")) {
+	           continue;
+	    	}
+
+        String state = null;
+        String location = null;
+        String price = null;
+        boolean skipNextLines = false;
+
+        for (String line : lines) {
+            if  (line.contains("Vencobb-Mota") || line.contains("Vencobb Rates-Mota")|| line.contains("Vencobb (Paper)-Mota")) {
+//                state = line.replace(" Vencobb-Mota", "" );
+            	 state = line.split("Vencobb")[0].trim();
+                skipNextLines = false; // Reset the skip flag
+            } else if (line.contains("Billing and Net Selling-Mota")) {
+                skipNextLines = true;
+            } else if (!skipNextLines) {
+                String[] parts = line.split("-");
+                if (parts.length == 2) {
+                    location = parts[0];
+                    String[] priceParts = parts[1].split("\\("); // Splitting price by '('
+                    if (priceParts.length > 0) {
+                        price = priceParts[0].trim();
+                    }else 
+                    {
+                      price = parts[1];
+
+                    }
+                    System.out.println("State: " + state);
+                    System.out.println("Location: " + location);
+                    System.out.println("Price: " + price);
+                    System.out.println("brand :"+brand);
+                    
+                	// Execute JavaScript to open a new window
+            		((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+            //
+//                    // Switch to the child window
+            		for (String windowHandle : driver.getWindowHandles()) {
+            			driver.switchTo().window(windowHandle);
+            
+            		}
+            //
+            		String url = "http://poultry.sunfra.in/wa_broiler_prices?state=" + state + "&location="
+            				+ location + "&price=" + price + "&brand="+ brand ; 
+            		
+            		
+            		System.out.println("URL: " + url);
+            		driver.get(url); // This line opens the URL in the WebDriver
+            //
+            		driver.switchTo().window(driver.getWindowHandles().iterator().next());
+                }
+                else if (parts.length == 3) {
+                    location = parts[0];
+                    String[] priceParts = parts[1].split("\\("); // Splitting price by '('
+                    if (priceParts.length > 0) {
+                        price = priceParts[0].trim();
+                    }else 
+                    {
+                      price = parts[1];
+
+                    }
+                    System.out.println("State: " + state);
+                    System.out.println("Location: " + location);
+                    System.out.println("Price: " + price);
+                    System.out.println("brand :"+brand);
+                    
+                	// Execute JavaScript to open a new window
+            		((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+            //
+//                    // Switch to the child window
+            		for (String windowHandle : driver.getWindowHandles()) {
+            			driver.switchTo().window(windowHandle);
+            
+            		}
+            //
+            		String url = "http://poultry.sunfra.in/wa_broiler_prices?state=" + state + "&location="
+            				+ location + "&price=" + price + "&brand="+ brand ; 
+            		
+            		
+            		System.out.println("URL: " + url);
+            		driver.get(url); // This line opens the URL in the WebDriver
+            //
+            		driver.switchTo().window(driver.getWindowHandles().iterator().next());
+                }
+            }
+
+        }
+		
+	}
+		else
+		{
+        	System.out.println(" message does not contain Vencobb");
+
+		}
+		
+	}
+		return messageCount;
+		
+	}
+	
+	public static void delete(WebDriver driver, int msgCount2)
+	{
+		driver.findElement(By.xpath("//div[@class='_3vsRF']//div[@aria-label='Menu']/span")).click();
+		System.out.println("menu");
+		Actions.waittill(10000);
+		driver.findElement(By.xpath("//li[@class='jScby Iaqxu FCS6Q']//div[contains(text(),'Select messages')]")).click();
+		Actions.waittill(5000);
+		
+		for ( int i = 1; i <=msgCount2; i++)
+		{
+	       Actions.waittill(10000);
+			
+			Actions.click(driver, By.xpath(
+					"(//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='_30oSb']//div[@tabindex=-1])[1]"));
+		
+		System.out.println("checkbox2" + msgCount2);
+		}
+		Actions.waittill(4000);
+		driver.findElement(By.xpath("(//div[@class='_2IUvV']//button[@type='button'])[3]")).click();
+		System.out.println("dele");//div[@class='_2IUvV']//button[@type='button'])[4]
+		Actions.waittill(10000);
+		Actions.waittill(5000);
+		driver.findElement(By.xpath("//div/button//div//div[contains(text(),'Delete for me')]")).click();
+		Actions.waittill(10000);
+		System.out.println("delete for me");
+		
+		driver.close();
+	   
+
+
+	}
+	public static int  count;
+	public static List<WebElement> messagseCount;
+	public static int message_in(WebDriver driver) {
+		Actions.waittill(3000);
+		messagseCount = driver.findElements(By.xpath("//div[contains(@class,'message-in' )]/div[1]"));
+		Actions.waittill(3000);
+		Actions.waittill(3000);
+		
+		count=messagseCount.size();
+		System.out.println("Total count is :"+count);
+		return count;
+	}
+	
+	public static String posting(WebDriver driver) {
+		if(count!=0) {
+			Actions.waittill(3000);
+			int cn=0;
+			int deleted_messCount=0;
+			for (WebElement webElement : messagseCount) {
+					String text=webElement.getText();
+//					System.out.println(text);
+					
+					if(text.contains("This message was deleted")) {
+						Actions.waittill(3000);
+						Actions.click(driver, By.xpath("(//span[@data-icon='menu'])[2]"));
+						Actions.waittill(3000);
+						Actions.click(driver, By.xpath("//div[contains(text(),'Select messages')]"));
+						Actions.waittill(3000);
+						Actions.click(driver, By.xpath("//div[contains(text(),'This message was deleted')]/../../../../../..//div[@aria-hidden='true']"));
+						Actions.waittill(3000);
+						Actions.click(driver, By.xpath("//span[@data-icon='delete']"));
+						Actions.waittill(3000);
+						Actions.click(driver, By.xpath("//div[contains(text(),'Delete for me')]"));
+
+						Actions.waittill(3000);
+
+						deleted_messCount++;
+					}
+					else {
+						Actions.waittill(3000);
+						cn++;
+					}
+			}
+			System.out.println("The count of message is "+cn);
+			System.out.println("The deleted message count is "+deleted_messCount);
+			
+		}
+		return "";
+	}
+	public static void multi_photo(WebDriver driver) {
+		Actions.waittill(7000);
+		List<WebElement> mul_photo = driver.findElements(By.xpath("//div[@class='_1BOF7 2AOIt 2oHR7']//div[@class='_2WE7M']"));
+		Actions.waittill(7000);
+		Actions.waittill(3000);
+		int mul_count=mul_photo.size();
+		System.out.println("The multiple photo count is :"+mul_count);
+		if(mul_count>0) {
+			Actions.waittill(5000);
+			Actions.click(driver,By.xpath("(//span[@data-icon='menu'])[2]"));
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("//div[contains(text(),'Select messages')]"));
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("//div[@class='_1BOF7 2AOIt 2oHR7']/../..//div[@aria-hidden='true']"));
+			Actions.click(driver,By.xpath("//span[@data-icon='forward']"));
+			Actions.click(driver,By.xpath("(//div[@title='Search input textbox'])[1]"));
+			Actions.sendKeys(driver, By.xpath("(//div[@title='Search input textbox'])[1]"), "Trading Broiler Prices");
+			Actions.waittill(5000);
+			System.out.println("a");
+			Actions.click(driver,By.xpath("(//div[@class='_199zF _3j691 _2N1Gm'])[1]"));
+			System.out.println("a2");
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("//div[@class='lhggkp7q j2mzdvlq axi1ht8l mrtez2t4']//div/span"));
+			System.out.println("a3");
+			Actions.waittill(5000);
+			Actions.click(driver,By.xpath("(//div[@role='textbox']//p)[1]"));
+			Actions.waittill(10000);
+			Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "POULTRY INDUSTRY BROILER RATES");
+			Actions.waittill(3000);
+			Actions.waittill(10000);
+			Actions.click(driver, By.xpath("//div[@class='_21S-L']//span//span[@class='matched-text _11JPr']"));
+			Actions.click(driver,By.xpath("(//span[@data-icon='menu'])[2]"));
+			Actions.waittill(2000);
+			Actions.click(driver,By.xpath("//div[contains(text(),'Select messages')]"));
+			Actions.waittill(2000);
+			Actions.click(driver,By.xpath("//div[@class='_1BOF7 2AOIt 2oHR7']/../..//div[@aria-hidden='true']"));
+			Actions.waittill(2000);
+			Actions.click(driver,By.xpath("//span[@data-icon='delete']"));
+			Actions.waittill(2000);
+			Actions.click(driver,By.xpath("//div[contains(text(),'Delete for me')]"));
+		}
+		
+	}
+	public static void Photo_Del(WebDriver driver) {	
+		
+		Actions.waittill(7000);
+		List<WebElement> photos = driver.findElements(By.xpath("//div[@aria-label='Open Picture']"));
+		Actions.waittill(7000);
+		Actions.waittill(3000);
+		int photos_count=photos.size();
+		System.out.println("The photo count is :"+photos_count);
+		if(photos_count>0) {
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("(//span[@data-icon='menu'])[2]"));
+			Actions.click(driver,By.xpath("//div[contains(text(),'Select messages')]"));
+			Actions.waittill(7000);
+			List<WebElement> multiple = driver.findElements(By.xpath("//div[@aria-label='Open Picture']/../../.././../..//div[@aria-hidden='true']"));
+			for (WebElement webElement : multiple) {
+				webElement.click();	
+				Actions.waittill(2000);
+			}
+			System.out.println("forward");
+			Actions.click(driver,By.xpath("//span[@data-icon='forward']"));
+			Actions.waittill(4000);
+			Actions.click(driver,By.xpath("(//div[@title='Search input textbox'])[1]"));
+			Actions.waittill(4000);
+			Actions.sendKeys(driver, By.xpath("(//div[@title='Search input textbox'])[1]"), "Trading Broiler Prices");
+//			Actions.sendKeys(driver, By.xpath("(//div[@class='_2vDPL']//div//div/p)[1]"), "Trading Layer Prices");
+			Actions.waittill(4000);
+//			Actions.click(driver,By.xpath("//div[@aria-hidden='true']"));
+			Actions.click(driver,By.xpath("(//div[@class='_199zF _3j691 _2N1Gm'])[1]"));
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("//div[@role='button']//span[@data-icon='send']"));
+			Actions.waittill(5000);
+			Actions.click(driver,By.xpath("(//div[@role='textbox']//p)[1]"));
+			Actions.waittill(7000);
+			Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "POULTRY INDUSTRY BROILER RATES");
+			Actions.waittill(7000);
+			Actions.click(driver, By.xpath("//div[@class='_21S-L']//span//span[@class='matched-text _11JPr']"));
+
+//			Actions.click(driver,By.xpath("//div[@class='_21S-L']//span[contains(text(),'Group vsj')]"));
+			Actions.waittill(5000);
+			//Main Group
+			Actions.click(driver,By.xpath("(//span[@data-icon='menu'])[2]"));
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("//div[contains(text(),'Select messages')]"));
+			Actions.waittill(7000);
+			List<WebElement> multiple_del = driver.findElements(By.xpath("//div[@aria-label='Open Picture']/../../.././../..//div[@aria-hidden='true']"));
+			for (WebElement webElement : multiple_del) {
+				webElement.click();
+			}
+			Actions.click(driver,By.xpath("//span[@data-icon='delete']"));
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("//div[contains(text(),'Delete for me')]"));
+			}				
+	}
+
+	
+	}

@@ -1,0 +1,276 @@
+package com.poultry;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class Common_Method {
+	public static int group_count;
+	public static void webload(WebDriver driver,String main_group) {	
+		Actions.waittill(5000);
+		Actions.click(driver, By.xpath("//span[@data-icon='search']"));
+		Actions.waittill(3000);
+		Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), main_group);
+		Actions.waittill(7000);
+		if(main_group.contains("POULTRY INDUSTRY LATEST")) {
+			Actions.click(driver, By.xpath("//div[@class='_ak8q']//span[contains(text(),'𝗧𝗥𝗬 𝗟𝗔𝗧𝗘𝗦𝗧')]"));
+		}else if(main_group.contains("POULTRY INDUSTRY BROILER RATES")) {
+			Actions.click(driver, By.xpath("//div[@class='_ak8q']//span[@dir='auto']//span[contains(text(),'𝗣𝗢𝗨𝗟𝗧𝗥𝗬 𝗜𝗡𝗗𝗨')]"));
+		}else {
+			Actions.click(driver, By.xpath("//div[@class='_ak8q']//span[contains(text(),'POULTRY INDUSTRY (Raw Materials)')]"));
+		}
+		System.out.println("Going to the no. "+ ++group_count +" group");
+		Actions.waittill(5000);
+	}
+	
+	public static void forward(WebDriver driver,String forward_group ,String main_group,String xpath) {
+		Actions.waittill(3000);
+		//Here, we are going to the main option clicking on the select message
+		select_msg(driver);
+		Actions.waittill(10000);
+		List<WebElement> todayMessages1 = driver.findElements(By.xpath(xpath));
+		int messagecount1 = todayMessages1.size();
+		System.out.println("checkboxcount: " + messagecount1);
+		for (WebElement webElement : todayMessages1) {
+			webElement.click();
+			Actions.waittill(2000);
+		}
+		Actions.waittill(8000);
+		//Here, we are forwarding the message from main group to local group and also again we are coming back to the main group
+		forwarding_msg(driver, forward_group, main_group);
+	}
+	 
+	public static void delete(WebDriver driver, int msgCount2){
+	    if(msgCount2>0) {
+	    	Actions.waittill(25000);
+	    	select_msg(driver);
+			String xpath="//div[@aria-hidden='true']";
+			List<WebElement> todayMessages1 = driver.findElements(By.xpath(xpath));
+			int count=todayMessages1.size();
+    	 	int Removing_ExtraCheckbox=0;
+			Actions.waittill(3000);
+			for (WebElement webElement : todayMessages1) {
+				Removing_ExtraCheckbox++;
+				webElement.click();
+				Actions.waittill(2000);
+				if(Removing_ExtraCheckbox==msgCount2) {
+    	 			break;
+    	 		}
+			}
+		 	Actions.waittill(3000);
+			//Here We are deleting the message
+			delete_met(driver);
+		 	Actions.waittill(2000);
+	     }
+      }
+	 
+	 public static void multi_photo(WebDriver driver,String forward_group,String main_group) {
+			Actions.waittill(7000);
+			List<WebElement> mul_photo = driver.findElements(By.xpath("//div[@class='_aml8']"));
+			Actions.waittill(10000);
+			int mul_count=mul_photo.size();
+			System.out.println("The multiple photo count is :"+mul_count);
+			if(mul_count>0) {
+				Actions.waittill(3000);
+				//Here, we are going to the main option clicking on the select message
+				select_msg(driver);
+				Actions.waittill(3000);
+				Actions.click(driver,By.xpath("//div[@class='_aml8']/../../..//div[@aria-hidden='true']"));
+				Actions.waittill(3000);
+				//Here, we are forwarding the message from main group to local group and also again we are coming back to the main group
+				forwarding_msg(driver, forward_group, main_group);
+				Actions.waittill(3000);
+				//Here, we are going to the main option clicking on the select message
+				select_msg(driver);
+				Actions.waittill(2000);
+				Actions.click(driver,By.xpath("//div[@class='_aml8']/../../..//div[@aria-hidden='true']"));
+				Actions.waittill(2000);
+				//Here We are deleting the message
+				delete_met(driver);
+			}
+		}
+	 
+	 	public static void Photo_Del(WebDriver driver,String forward_group,String main_group) {	
+			Actions.waittill(10000);
+			List<WebElement> photos = driver.findElements(By.xpath("//div[@aria-label='Open picture']"));
+			Actions.waittill(10000);
+			int photos_count=photos.size();
+			System.out.println("The photo count is :"+photos_count);
+			if(photos_count>0) {
+				Actions.waittill(2000);
+				//Here, we are going to the main option clicking on the select message
+				select_msg(driver);
+				Actions.waittill(7000);
+				List<WebElement> multiple = driver.findElements(By.xpath("//div[@aria-label='Open picture']/../../.././../..//div[@aria-hidden='true']"));
+				for (WebElement webElement : multiple) {
+					webElement.click();	
+					Actions.waittill(2000);
+				}
+				Actions.waittill(2000);
+				//Here, we are forwarding the message from main group to local group and also again we are coming back to the main group
+				forwarding_msg(driver, forward_group, main_group);
+				Actions.waittill(2000);
+				//Here, we are going to the main option clicking on the select message
+				select_msg(driver);
+				Actions.waittill(7000);
+				List<WebElement> multiple_del = driver.findElements(By.xpath("//div[@aria-label='Open picture']/../../.././../..//div[@aria-hidden='true']"));
+				for (WebElement webElement : multiple_del) {
+					webElement.click();
+					Actions.waittill(2000);
+				}
+				//Here We are deleting the message
+				delete_met(driver);
+			}				
+	 	}
+	 
+	 	public static void video_del(WebDriver driver,String forward_group,String main_group) {		
+			Actions.waittill(7000);
+			List<WebElement> videos = driver.findElements(By.xpath("//span[@data-icon='media-play']"));
+			Actions.waittill(5000);
+			int videos_count=videos.size();
+			System.out.println("The video count is :"+videos_count);
+			if(videos_count>0) {
+				List<WebElement> run = driver.findElements(By.xpath("//span[@data-icon='media-play']"));
+				System.out.println("Running the video");
+				for (WebElement webElement : run) {
+					Actions.waittill(3000);
+					String time=driver.findElement(By.xpath("//div[@class='l7jjieqr kjemk6od k17s6i4e fewfhwl7']/../span")).getText();
+					String []split_time=time.split(":");
+					int actual_time=Integer.parseInt(split_time[1]);
+					webElement.click();
+					Actions.waittill(actual_time*1000);
+					Actions.click(driver, By.xpath("//span[@data-icon='x-viewer']"));
+					Actions.waittill(3000);
+				}
+				Actions.waittill(2000);
+				//Here, we are going to the main option clicking on the select message
+				select_msg(driver);
+				Actions.waittill(7000);
+				List<WebElement> multiple = driver.findElements(By.xpath("//span[@data-icon='media-play']/../..//../../../../../..//div[@aria-hidden='true']"));		
+				for (WebElement webElement : multiple) {
+					webElement.click();
+					Actions.waittill(2000);
+				}
+				Actions.waittill(3000);
+				//Here, we are forwarding the message from main group to local group and also again we are coming back to the main group
+				forwarding_msg(driver, forward_group, main_group);
+				Actions.waittill(2000);
+				//Here, we are going to the main option clicking on the select message
+				select_msg(driver);
+				Actions.waittill(7000);
+				List<WebElement> multiple_del = driver.findElements(By.xpath("//span[@data-icon='media-play']/../..//../../../../../..//div[@aria-hidden='true']"));
+				Actions.waittill(2000);
+				for (WebElement webElement : multiple_del) {
+					webElement.click();
+					Actions.waittill(2000);
+				}
+				Actions.waittill(2000);
+				//Here We are deleting the message
+				delete_met(driver);
+				}				
+	 	}
+	 
+	 public static void delete_met (WebDriver driver) {
+	 			Actions.waittill(4000);
+				Actions.click(driver,By.xpath("//span[@data-icon='delete']"));
+				Actions.waittill(4000);
+				Actions.click(driver,By.xpath("//div[contains(text(),'Delete for me')]"));
+				Actions.waittill(2000);
+	 }
+	 		
+	 public static void select_msg(WebDriver driver) {
+	 			Actions.waittill(5000);
+				Actions.click(driver,By.xpath("(//span[@data-icon='menu'])[2]"));
+				Actions.waittill(3000);
+				Actions.click(driver,By.xpath("//div[contains(text(),'Select messages')]"));
+				Actions.waittill(2000);
+	 }
+	 
+	 public static void forwarding_msg(WebDriver driver,String forward_group,String main_group) {
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("//span[@data-icon='forward']"));
+			Actions.waittill(5000);
+			Actions.sendKeys(driver, By.xpath("(//div[@class='_ai05']//div//div/p)[1]"),forward_group);
+			Actions.waittill(5000);
+			Actions.click(driver,By.xpath("//div[@class='_ak72 _ak73 _ak75']"));
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("//div[@role='button']//span[@data-icon='send']"));
+			Actions.waittill(3000);
+			Actions.click(driver,By.xpath("(//div[@role='textbox']//p)[1]"));
+			Actions.waittill(7000);
+			Actions.sendKeys(driver, By.xpath("(//div[@role='textbox']//p)[1]"), main_group);
+			Actions.waittill(7000);
+			if(main_group.contains("POULTRY INDUSTRY LATEST")) {
+				Actions.click(driver, By.xpath("//div[@class='_ak8q']//span[contains(text(),'𝗧𝗥𝗬 𝗟𝗔𝗧𝗘𝗦𝗧')]"));
+			}else if(main_group.contains("POULTRY INDUSTRY BROILER RATES")) {
+				Actions.click(driver, By.xpath("//div[@class='_ak8q']//span[@dir='auto']//span[contains(text(),'𝗣𝗢𝗨𝗟𝗧𝗥𝗬 𝗜𝗡𝗗𝗨')]"));
+			}else {
+				Actions.click(driver, By.xpath("//div[@class='_ak8q']//span[contains(text(),'POULTRY INDUSTRY (Raw Materials)')]"));
+			}
+			Actions.waittill(4000);
+	 }
+	 
+	 public static void yesterday_mess(WebDriver driver,String forward_group,String main_group) {
+		 	Actions.waittill(2000);
+			LocalDate currentDate = LocalDate.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d");
+			String formattedDate = currentDate.format(formatter);
+			String []split_date=formattedDate.split("/");
+			int removing_day= Integer.parseInt(split_date[1])-1;
+			String yesterday_date=split_date[0]+"/"+removing_day;
+			Actions.waittill(20000);
+			String xpathExpression = "//div[contains(@class, 'message-in')]//div[contains(@data-pre-plain-text,'"
+					+ yesterday_date + "')]";
+			Actions.waittill(5000);
+			List<WebElement> todayMessages = driver.findElements(By.xpath(xpathExpression));
+			 int messageCount = todayMessages.size();
+			System.out.println("Yesterday Message : " + messageCount);
+			if(messageCount==0) {
+				return ;
+			}	
+			Actions.waittill(7000);
+			String xpath="//div[contains(@data-pre-plain-text,'" + yesterday_date + "')]/../../../../..//div[@aria-hidden='true']";
+			//Here we are transferring the message from the main group to the local group
+			Common_Method.forward(driver,forward_group ,main_group , xpath);
+			Actions.waittill(3000);
+			if(messageCount>0) {
+				 Actions.waittill(2000);
+		    	 select_msg(driver);
+		    	 Actions.waittill(10000);
+		    	 List<WebElement> todayMessages1 = driver.findElements(By.xpath(xpath));
+		    	 Actions.waittill(3000);
+		    	 for (WebElement webElement : todayMessages1) {
+		    	 	webElement.click();
+		    	 	Actions.waittill(2000);
+		    	 }
+		    	 Actions.waittill(3000);
+		    	 //Here We are deleting the message
+		    	 delete_met(driver);
+		    	 Actions.waittill(2000);
+		    }
+	 }
+	 
+	 public static void sticker (WebDriver driver) {
+		 Actions.waittill(7000);
+		 List<WebElement> stickers = driver.findElements(By.xpath("//div[contains(@class, '_ajxb ajxj ajxd')]"));
+		 Actions.waittill(2000);
+		 int Sticker_count= stickers.size();
+		 System.out.println("Sticker count is : " + Sticker_count);
+		 if(Sticker_count>0) {
+			for (WebElement webElement : stickers) {
+				 Actions.waittill(2000);
+				webElement.click();
+				Actions.waittill(3000);
+				driver.findElement(By.xpath("//span[@data-icon='delete']")).click();
+				Actions.waittill(4000);
+				 Actions.click(driver,By.xpath("//div[contains(text(),'Delete for me')]"));
+				 Actions.waittill(2000);
+			}
+		 }
+	 }
+}
+

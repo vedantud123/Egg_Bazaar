@@ -1,0 +1,74 @@
+package com.poultry;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class Database {
+	
+	public static Connection con() throws SQLException
+	{
+		Connection  connection=DriverManager.getConnection(Globalconstant.Db_Url,Globalconstant.Db_User,Globalconstant.Db_PWD);
+		return connection;
+	}
+	
+	public static void clos(Connection connection) throws SQLException
+	{
+		connection.close();	
+	}
+
+	public static void pass_todatabase(String insertSql,String location,String price,String time ,String storedtime,int state_id) throws SQLException {
+		Connection connection2 = Database.con();
+		try (PreparedStatement ps = connection2.prepareStatement(insertSql)) {
+			ps.setString(1, location);
+			ps.setString(2, price);
+			ps.setString(3, time);
+			ps.setString(4, storedtime);
+			ps.setInt(5, state_id);
+
+			ps.executeUpdate();
+
+			System.out.println("successfull");
+			ps.close();
+			connection2.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void store_mess(String insertSql1,String Group_name,String Message,String formattedDate1) throws SQLException {
+		Connection connection = Database.con();
+		try (PreparedStatement ps = connection.prepareStatement(insertSql1)) {
+			System.out.println("entered cull messagedb");
+			ps.setString(1, Group_name);
+			ps.setString(2,Message );
+			ps.setString(3, formattedDate1);
+			ps.executeUpdate();
+			System.out.println("successfull");
+			ps.close();
+			connection.close();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void removed(String admin ,String customer,String AddedOrRemoved,String formattedDate1) throws SQLException {
+		Connection connection1 = Database.con();
+		String insertSql = "INSERT INTO `sunfra_poultry`.`wa_ad_re_person` (ADMIN,customer, data,date) VALUES (?, ?,?,?)";
+		try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+			ps.setString(1, admin);
+			ps.setString(2, customer);
+			ps.setString(3, AddedOrRemoved);
+			ps.setString(4, formattedDate1);
+			ps.executeUpdate();
+			System.out.println("successfull");
+			ps.close();
+			connection1.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+}

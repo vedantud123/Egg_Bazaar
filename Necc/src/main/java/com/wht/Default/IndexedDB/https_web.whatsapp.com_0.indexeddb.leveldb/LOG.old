@@ -1,0 +1,49 @@
+2023/10/20-16:43:07.767 9c0 Reusing MANIFEST C:\Users\Vamsi\eclipse-workspace\whatsappscrap\src\main\java\com\wht\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/10/20-16:43:07.768 9c0 Recovering log #96
+2023/10/20-16:43:07.786 9c0 Reusing old log C:\Users\Vamsi\eclipse-workspace\whatsappscrap\src\main\java\com\wht\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000096.log 
+2023/10/20-16:43:08.742 5c40 Level-0 table #104: started
+2023/10/20-16:43:08.823 5c40 Level-0 table #104: 370860 bytes OK
+2023/10/20-16:43:08.867 5c40 Delete type=0 #96
+2023/10/20-16:43:08.868 62dc Manual compaction at level-0 from '\x00\x1c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1d\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/10/20-16:43:08.970 5c40 Compacting 1@1 + 4@2 files
+2023/10/20-16:43:09.233 5c40 Generated table #105@1: 43976 keys, 2197987 bytes
+2023/10/20-16:43:09.556 5c40 Generated table #106@1: 24310 keys, 2186526 bytes
+2023/10/20-16:43:09.821 5c40 Generated table #107@1: 51135 keys, 2210552 bytes
+2023/10/20-16:43:09.900 5c40 Generated table #108@1: 13234 keys, 291580 bytes
+2023/10/20-16:43:09.901 5c40 Compacted 1@1 + 4@2 files => 6886645 bytes
+2023/10/20-16:43:09.941 5c40 compacted to: files[ 0 0 4 0 0 0 0 ]
+2023/10/20-16:43:09.941 5c40 Delete type=2 #98
+2023/10/20-16:43:09.942 5c40 Delete type=2 #99
+2023/10/20-16:43:09.942 5c40 Delete type=2 #100
+2023/10/20-16:43:09.942 5c40 Delete type=2 #101
+2023/10/20-16:43:09.942 5c40 Delete type=2 #104
+2023/10/20-16:43:12.023 9c0 Level-0 table #110: started
+2023/10/20-16:43:12.210 9c0 Level-0 table #110: 948082 bytes OK
+2023/10/20-16:43:12.279 9c0 Delete type=0 #103
+2023/10/20-16:43:12.301 9c0 Compacting 1@1 + 4@2 files
+2023/10/20-16:43:12.556 9c0 Generated table #111@1: 47050 keys, 2200504 bytes
+2023/10/20-16:43:12.760 9c0 Generated table #112@1: 27675 keys, 2182412 bytes
+2023/10/20-16:43:12.981 9c0 Generated table #113@1: 32550 keys, 2201218 bytes
+2023/10/20-16:43:13.086 9c0 Generated table #114@1: 35073 keys, 763353 bytes
+2023/10/20-16:43:13.086 9c0 Compacted 1@1 + 4@2 files => 7347487 bytes
+2023/10/20-16:43:13.100 9c0 compacted to: files[ 0 0 4 0 0 0 0 ]
+2023/10/20-16:43:13.101 9c0 Delete type=2 #105
+2023/10/20-16:43:13.101 9c0 Delete type=2 #106
+2023/10/20-16:43:13.101 9c0 Delete type=2 #107
+2023/10/20-16:43:13.101 9c0 Delete type=2 #108
+2023/10/20-16:43:13.101 9c0 Delete type=2 #110
+2023/10/20-16:44:35.161 5c40 Level-0 table #116: started
+2023/10/20-16:44:35.298 5c40 Level-0 table #116: 903535 bytes OK
+2023/10/20-16:44:35.344 5c40 Delete type=0 #109
+2023/10/20-16:44:35.427 62dc Compacting 1@1 + 4@2 files
+2023/10/20-16:44:35.598 62dc Generated table #117@1: 45070 keys, 2198306 bytes
+2023/10/20-16:44:35.749 62dc Generated table #118@1: 24598 keys, 2182135 bytes
+2023/10/20-16:44:35.917 62dc Generated table #119@1: 46985 keys, 2209068 bytes
+2023/10/20-16:44:35.994 62dc Generated table #120@1: 18684 keys, 410509 bytes
+2023/10/20-16:44:35.994 62dc Compacted 1@1 + 4@2 files => 7000018 bytes
+2023/10/20-16:44:36.027 62dc compacted to: files[ 0 0 4 0 0 0 0 ]
+2023/10/20-16:44:36.028 62dc Delete type=2 #111
+2023/10/20-16:44:36.028 62dc Delete type=2 #112
+2023/10/20-16:44:36.028 62dc Delete type=2 #113
+2023/10/20-16:44:36.028 62dc Delete type=2 #114
+2023/10/20-16:44:36.028 62dc Delete type=2 #116

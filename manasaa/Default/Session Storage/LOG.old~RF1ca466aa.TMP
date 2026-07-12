@@ -1,0 +1,5 @@
+2025/04/30-05:00:11.442 27ac Reusing MANIFEST C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\Session Storage/MANIFEST-000001
+2025/04/30-05:00:11.443 27ac Recovering log #108
+2025/04/30-05:00:11.443 27ac (ignoring error) C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\Session Storage/000108.log: dropping 20375 bytes; Corruption: checksum mismatch
+2025/04/30-05:00:11.443 27ac (ignoring error) C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\Session Storage/000108.log: dropping 84 bytes; Corruption: missing start of fragmented record(2)
+2025/04/30-05:00:11.445 27ac Reusing old log C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\Session Storage/000108.log 

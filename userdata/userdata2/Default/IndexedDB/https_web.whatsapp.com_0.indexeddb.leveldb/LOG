@@ -1,0 +1,6 @@
+2024/11/10-03:30:06.478 2c58 Reusing MANIFEST C:\Users\Vinay server 3\eclipse-workspace\userdata\userdata2\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-141779
+2024/11/10-03:30:06.478 2c58 Recovering log #141951
+2024/11/10-03:30:06.487 2c58 Reusing old log C:\Users\Vinay server 3\eclipse-workspace\userdata\userdata2\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/141951.log 
+2024/11/10-03:30:07.295 12f4 Level-0 table #141982: started
+2024/11/10-03:30:07.426 12f4 Level-0 table #141982: 262477 bytes OK
+2024/11/10-03:30:07.507 12f4 Delete type=0 #141951

@@ -1,0 +1,100 @@
+package com.poultry;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.poultry.BaseClass;
+import com.poultry.ScrapData;
+
+
+public class Poultry_service  extends BaseClass
+{
+	@Test
+	public void Poultry_data_scrap() throws ClassNotFoundException, SQLException
+
+	{
+
+		LocalDate currentDate = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+		String formattedDate = currentDate.format(formatter);
+		
+	try {
+//		Baseclass.openBrowser();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		System.out.println("HIIIIII");
+		Actions.waittill(30000);
+//		Actions.waittill(6000);
+//
+//		ScrapData.webload(driver);
+//		int msgCount = 0;
+//		msgCount = ScrapData.ScrapMessage(driver);
+//		System.out.println(msgCount);
+//		Actions.waittill(6000);
+//		ScrapData.delete(driver, msgCount);	
+        Actions.waittill(6000);
+
+		Cullbird_scrapdata .webload(driver);
+		Actions.waittill(6000);
+		Cullbird_scrapdata.message_in(driver);
+		Actions.waittill(6000);
+		Cullbird_scrapdata.posting( driver);
+		Actions.waittill(6000);
+		Cullbird_scrapdata.Photo_Del(driver);
+		Actions.waittill(6000);
+
+//		int msgCount = 0;
+		int msgCount2 = 0;
+		msgCount2= Cullbird_scrapdata .cullbird_ScrapMessage(driver);	
+
+		Actions.waittill(3000);
+		 Cullbird_scrapdata.delete(driver, msgCount2);
+			Actions.waittill(4000);
+//			 Cullbird_scrapdata.remove(driver);
+//				Actions.waittill(4000);
+	
+			broiler_data.webload(driver);
+			Actions.waittill(6000);
+			broiler_data.message_in(driver);
+			Actions.waittill(6000);
+			broiler_data.posting( driver);
+			Actions.waittill(6000);
+			broiler_data.Photo_Del(driver);
+			Actions.waittill(6000);
+			int msgcount3=0;	
+			msgcount3=broiler_data.Broiler_ScrapMessage(driver);
+			Actions.waittill(6000);
+			broiler_data.delete(driver, msgcount3);
+
+
+		 driver.close();
+
+		
+
+	}
+}
+
+

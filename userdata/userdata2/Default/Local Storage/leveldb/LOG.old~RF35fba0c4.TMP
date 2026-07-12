@@ -1,0 +1,4 @@
+2023/11/07-06:00:06.009 2c20 Reusing MANIFEST C:\Users\Vinay server 3\eclipse-workspace\userdata\userdata2\Default\Local Storage\leveldb/MANIFEST-000001
+2023/11/07-06:00:06.012 2c20 Recovering log #157
+2023/11/07-06:00:06.013 2c20 (ignoring error) C:\Users\Vinay server 3\eclipse-workspace\userdata\userdata2\Default\Local Storage\leveldb/000157.log: dropping 9082 bytes; Corruption: checksum mismatch
+2023/11/07-06:00:06.015 2c20 Reusing old log C:\Users\Vinay server 3\eclipse-workspace\userdata\userdata2\Default\Local Storage\leveldb/000157.log 
