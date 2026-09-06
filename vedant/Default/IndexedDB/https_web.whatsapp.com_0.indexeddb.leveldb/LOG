@@ -1,0 +1,54 @@
+2025/10/22-18:45:12.672 1de0 Reusing MANIFEST C:\Users\Vinay server 3\eclipse-workspace\vedant\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/10/22-18:45:12.673 1de0 Recovering log #763
+2025/10/22-18:45:12.692 1de0 Reusing old log C:\Users\Vinay server 3\eclipse-workspace\vedant\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000763.log 
+2025/10/22-18:45:12.692 1de0 Delete type=2 #753
+2025/10/22-18:45:12.693 1de0 Delete type=2 #754
+2025/10/22-18:45:12.693 1de0 Delete type=2 #755
+2025/10/22-18:45:12.693 1de0 Delete type=2 #756
+2025/10/22-18:45:12.693 1de0 Delete type=2 #757
+2025/10/22-18:45:12.693 1de0 Delete type=2 #758
+2025/10/22-18:45:12.693 1de0 Delete type=2 #759
+2025/10/22-18:45:12.693 1de0 Delete type=2 #760
+2025/10/22-18:45:12.694 1de0 Delete type=2 #761
+2025/10/22-18:45:12.694 1de0 Delete type=2 #764
+2025/10/22-18:45:14.186 1de0 Level-0 table #776: started
+2025/10/22-18:45:14.260 1de0 Level-0 table #776: 459205 bytes OK
+2025/10/22-18:45:14.288 1de0 Delete type=0 #763
+2025/10/22-18:45:14.288 1de0 Manual compaction at level-0 from '\x00g\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00h\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/10/22-18:45:15.480 1e20 Compacting 1@1 + 9@2 files
+2025/10/22-18:45:15.669 1e20 Generated table #777@1: 87923 keys, 2239192 bytes
+2025/10/22-18:45:15.873 1e20 Generated table #778@1: 54790 keys, 2708051 bytes
+2025/10/22-18:45:16.133 1e20 Generated table #779@1: 28567 keys, 2220398 bytes
+2025/10/22-18:45:16.295 1e20 Generated table #780@1: 814 keys, 2132473 bytes
+2025/10/22-18:45:16.485 1e20 Generated table #781@1: 22565 keys, 2211351 bytes
+2025/10/22-18:45:16.635 1e20 Generated table #782@1: 6151 keys, 2124113 bytes
+2025/10/22-18:45:16.802 1e20 Generated table #783@1: 55996 keys, 2193820 bytes
+2025/10/22-18:45:17.040 1e20 Generated table #784@1: 113271 keys, 2266295 bytes
+2025/10/22-18:45:17.111 1e20 Generated table #785@1: 18764 keys, 381420 bytes
+2025/10/22-18:45:17.112 1e20 Compacted 1@1 + 9@2 files => 18477113 bytes
+2025/10/22-18:45:17.136 1e20 compacted to: files[ 0 0 9 0 0 0 0 ]
+2025/10/22-18:45:17.136 1e20 Delete type=2 #765
+2025/10/22-18:45:17.137 1e20 Delete type=2 #766
+2025/10/22-18:45:17.137 1e20 Delete type=2 #767
+2025/10/22-18:45:17.137 1e20 Delete type=2 #768
+2025/10/22-18:45:17.137 1e20 Delete type=2 #769
+2025/10/22-18:45:17.137 1e20 Delete type=2 #770
+2025/10/22-18:45:17.137 1e20 Delete type=2 #771
+2025/10/22-18:45:17.137 1e20 Delete type=2 #772
+2025/10/22-18:45:17.137 1e20 Delete type=2 #773
+2025/10/22-18:45:17.137 1e20 Delete type=2 #776
+2025/10/22-19:04:16.695 164 Level-0 table #787: started
+2025/10/22-19:04:16.819 164 Level-0 table #787: 1386731 bytes OK
+2025/10/22-19:04:16.836 164 Delete type=0 #775
+2025/10/22-19:04:17.618 1e20 Compacting 1@1 + 9@2 files
+2025/10/22-19:04:17.828 1e20 Generated table #788@1: 87555 keys, 2238093 bytes
+2025/10/22-19:04:18.023 1e20 Generated table #789@1: 58604 keys, 2697830 bytes
+2025/10/22-19:04:18.245 1e20 Generated table #790@1: 28634 keys, 2245881 bytes
+2025/10/22-19:04:18.362 1e20 Generated table #791@1: 840 keys, 2131815 bytes
+2025/10/22-19:04:18.525 1e20 Generated table #792@1: 19408 keys, 2203702 bytes
+2025/10/22-19:04:18.653 1e20 Generated table #793@1: 6365 keys, 2126559 bytes
+2025/10/22-19:04:18.800 1e20 Generated table #794@1: 47687 keys, 2184981 bytes
+2025/10/22-19:04:19.005 1e20 Generated table #795@1: 113419 keys, 2267738 bytes
+2025/10/22-19:04:19.101 1e20 Generated table #796@1: 32562 keys, 656246 bytes
+2025/10/22-19:04:19.101 1e20 Compacted 1@1 + 9@2 files => 18752845 bytes
+2025/10/22-19:04:19.140 1e20 compacted to: files[ 0 0 9 0 0 0 0 ]

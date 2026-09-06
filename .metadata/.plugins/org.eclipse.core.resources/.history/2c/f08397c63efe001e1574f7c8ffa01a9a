@@ -1,0 +1,142 @@
+package com.poultry;
+
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class Community {
+	
+	public static int ScarpMessage(WebDriver driver) throws SQLException {
+		int messageCount =0;
+		String formattedDate=Actions.formatteddate();
+		Actions.waittill(10000);
+		String xpathExpression = "//div[contains(@class, 'message-in')]//div[contains(@data-pre-plain-text,'"
+				+ formattedDate + "')]";
+		Actions.waittill(10000);
+		List<WebElement> todayMessages = driver.findElements(By.xpath(xpathExpression));
+
+		messageCount = todayMessages.size();
+		System.out.println("Today's feeds count : " + messageCount);
+		if(messageCount==0) {
+			return 0;
+		}
+
+		String xpath="//div[@aria-hidden='true']";
+		//Here we are transferring the message from the main group to the local group
+		Common_Method.forward(driver, Globalconstant.tradingLayerForwardGroup, Globalconstant.tradingFeedsmaingroup, xpath);
+		Actions.waittill(3000);
+
+		Date currentDate1 = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String formattedDate1 = dateFormat.format(currentDate1);
+		
+		for (int i = 0; i < messageCount; i++) {
+			Actions.waittill(3000);
+			Actions.check_readmore(driver);
+			Actions.waittill(3000);
+			String Message=Actions.getText(driver, By.xpath("(//div[@role='application']//span[contains(@class, 'selectable-text')])["+ (i+1) +"]"));
+			Actions.waittill(3000);
+			String Group_name = "feeds";
+			System.out.println("group_name : " + Group_name);
+			String insertSql1 = "INSERT INTO `sunfra_poultry`.`whatsapp_msgs` (group_name,message,posted_date) VALUES (?,?,?)";
+			Database.store_mess(insertSql1, Group_name, Message, formattedDate1);
+			System.out.println("Done with feeds");
+			Actions.waittill(3000);
+			String[] lines = Message.split("\n");
+			Actions.waittill(3000);
+			if(Message.contains("Feeds")||Message.contains("Maize")) {
+				if(Message.contains("DDGS")) {
+					continue;
+				}
+				String category=null;
+				String location=null;
+				String price=null;
+		        for(String line:lines) {
+		    		boolean check_value=false;
+		        	if(line.contains("Groundnut Extraction")||line.contains("DORB")||line.contains("Mustard De Oiled Cake")||line.contains("Soya De Oiled Cake")||line.contains("Octagon Foods Latur DOC Rates")) {
+		        		category=line;
+		        	}else if(line.contains("Maize")) {
+		        		category="Maize";
+		        	}
+		        	else if (line.contains("%") && line.contains("DOC")||line.contains("%") && line.contains("ROC")){
+		        		Actions.waittill(2000);
+						String []each_line=line.split("%");
+						location=each_line[0]+"%";
+						price=each_line[1].replace("-", "");
+						check_value=true;				
+		        	}
+		        	else if(line.contains("%") && line.contains("SBM")){
+		        		Actions.waittill(2000);
+						String []each_line=line.split("-");
+						location=each_line[0];
+						System.out.println(location);
+						price=each_line[1].replaceAll("[^0-9]", "");
+						System.out.println(price);
+						check_value=true;
+		        	}
+					else if(line.contains("-")) {
+		        		 if(line.contains("Sai Simran Nanded")) {	
+						   }else if(line.contains("Shriniwasa Cattle Feeds Nanded")) {
+						   }else if (line.contains("Nanded")) {
+							   line=line.replace("Nanded", "Shriniwasa Cattle Feeds Nanded");
+						   }
+		        		String[] Seperate_line=line.split("-");
+		        		 if(Seperate_line.length==2) {
+							   location=Seperate_line[0].replace("(Ready)", "").replace("(Ready Loading)", "");
+							   price=Seperate_line[1];
+							   if(price.contains("/")) {
+								   String []split_price=price.split("/");
+								   int a=Integer.parseInt(split_price[0]);
+								   int b=Integer.parseInt(split_price[1]);
+								   int c=((a+b))/2;
+								   price=Integer.toString(c);
+								   System.out.println(price);
+							   }
+							   Actions.waittill(2000);
+							   if(price.contains(" ")) {
+								   	String []pass=price.split(" ");
+									  price=pass[0];
+							   }
+							   else if(price.contains("(")) {
+									  String []pass=price.split("\\(");
+									  price=pass[0];
+							   }
+							   price=price.replaceAll("[^0-9]", "");
+							   check_value=true;
+		        		 } else if(Seperate_line.length==3) {
+		        			 	String ele=Seperate_line[0]+" "+Seperate_line[1];
+								location=ele.replace("(Ready)", "").replace("(Ready Loading)", "");
+								price=Seperate_line[2];
+								 if(price.contains("/")) {
+									   String []split_price=price.split("/");
+									   int a=Integer.parseInt(split_price[0]);
+									   int b=Integer.parseInt(split_price[1]);
+									   int c=((a+b))/2;
+									   price=Integer.toString(c);
+									   System.out.println(price);
+								   }
+								check_value=true;
+						}
+		        	}
+		        	if (check_value) {
+		        		System.out.println("Category : "+category); 
+		        		System.out.println("Location : "+location);
+		        		System.out.println("price : "+price);
+		        		Actions.waittill(3000);
+						Actions.url(driver,"wa_feed_prices", "category="+category , "location="+location, "price="+price, "date=null");
+		        	}		
+		       }
+			}else {
+				System.out.println("No need to scrap this message");
+			}
+		}
+		return messageCount;
+	}
+}

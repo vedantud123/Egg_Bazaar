@@ -1,0 +1,5 @@
+2025/07/06-15:30:08.032 16fc Reusing MANIFEST C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\shared_proto_db/MANIFEST-000001
+2025/07/06-15:30:08.033 16fc Recovering log #45
+2025/07/06-15:30:08.033 16fc (ignoring error) C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\shared_proto_db/000045.log: dropping 29026 bytes; Corruption: checksum mismatch
+2025/07/06-15:30:08.033 16fc (ignoring error) C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\shared_proto_db/000045.log: dropping 236 bytes; Corruption: missing start of fragmented record(2)
+2025/07/06-15:30:08.034 16fc Reusing old log C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\shared_proto_db/000045.log 

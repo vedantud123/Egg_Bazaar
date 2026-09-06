@@ -1,0 +1,1924 @@
+package com.poultry;
+
+import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.text.ParseException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class Cullbird_scrapdata 
+{
+public static void webload(WebDriver driver) 
+{
+		
+		Actions.waittill(5000);
+		Actions.click(driver, By.xpath("(//div[@role='textbox']//p)[1]"));
+//		driver.findElement(By.xpath("(//div[@role='textbox']//p)[1]")).click();
+		System.out.println("entered cull bird ");
+		Actions.waittill(5000);
+//		Actions.click(driver, By.xpath("//div//span//button[@aria-label='Cancel search']"));
+		System.out.println("changed another group successfully");
+		System.out.println("b");
+		
+//		Actions.waittill(3000);
+
+		//div//span//button[@aria-label='Cancel search']
+
+//		Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "Trading Layer Prices");
+//		driver.findElement(By.xpath("(//div[@role='textbox']//p)[1]")).click();
+//		System.out.println("b1");
+
+		
+		Actions.waittill(3000);
+
+
+//		Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "Group vsj");
+//		Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "𝗣𝗢𝗨𝗟𝗧𝗥𝗬 𝗜𝗡𝗗𝗨𝗦𝗧𝗥𝗬 𝗟𝗔𝗧𝗘𝗦𝗧");
+		Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), " POULTRY INDUSTRY LATEST ");
+
+
+		System.out.println("b2");
+
+
+//		Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), " https://www.poultryrate.com ");
+
+
+		Actions.waittill(3000);
+
+//		Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'Trading Layer Prices')]"));
+//		Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'Group vsj')]"));
+//		Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'𝗣𝗢𝗨𝗟𝗧𝗥𝗬 𝗜𝗡𝗗𝗨𝗦𝗧𝗥𝗬 𝗟𝗔𝗧𝗘𝗦𝗧')]"));
+		Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'𝗧𝗥𝗬 𝗟𝗔𝗧𝗘𝗦𝗧')]"));
+
+		System.out.println("b3");
+
+//		Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'WWW.POULTRYRATE.COM')]"));
+
+
+	}
+public static int cullbird_ScrapMessage(WebDriver driver) throws ClassNotFoundException, SQLException {
+	int messageCount =0;
+	// TODO Auto-generated method stub
+//	Connection connection = Database.con();
+	LocalDate currentDate = LocalDate.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+	// Format the current date using the formatter
+	String formattedDate = currentDate.format(formatter);
+	// Print the formatted date
+	System.out.println(formattedDate);
+	Actions.waittill(30000);
+	Actions.waittill(10000);
+
+	String xpathExpression = "//div[contains(@class, 'message-in')]//div[contains(@data-pre-plain-text,'"
+			+ formattedDate + "')]";
+	Actions.waittill(5000);
+
+	List<WebElement> todayMessages = driver.findElements(By.xpath(xpathExpression));
+
+	 messageCount = todayMessages.size();
+	System.out.println("Today's cull birds message count: " + messageCount);
+	if(messageCount==0) 
+	{
+		Actions.waittill(6000);
+		 Cullbird_scrapdata.remove(driver);
+			Actions.waittill(4000);
+//
+//		 Cullbird_scrapdata.clear_chat(driver);
+//			Actions.waittill(4000);
+
+
+		broiler_data.webload(driver);
+		Actions.waittill(6000);
+		broiler_data.message_in(driver);
+		Actions.waittill(6000);
+		broiler_data.posting( driver);
+		Actions.waittill(6000);
+
+		int msgcount3=0;
+		msgcount3=broiler_data.Broiler_ScrapMessage(driver);
+		Actions.waittill(6000);
+		
+		broiler_data.delete(driver, msgcount3);
+		Actions.waittill(1000);
+		 driver.close();
+
+	}	
+	Actions.waittill(7000);
+	driver.findElement(By.xpath("//div[@class='_3vsRF']//div[@aria-label='Menu']/span")).click();
+	System.out.println("menu1");
+	Actions.waittill(9000);
+	driver.findElement(By.xpath("//li[@class='jScby Iaqxu FCS6Q']//div[contains(text(),'Select messages')]")).click();
+	System.out.println("select msgs1");
+	Actions.waittill(6000);
+	String xpathExpression1 = "//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='_30oSb']//div[@tabindex=-1]";
+//	
+	Actions.waittill(5000);
+	List<WebElement> todayMessages1 = driver.findElements(By.xpath(xpathExpression1));
+//////
+	int messagecount1 = todayMessages1.size();
+	System.out.println("checkboxcount: " + messagecount1);
+	int k;
+	for ( k = 1; k <= messagecount1; k++)
+//////
+	{
+		Actions.waittill(8000);
+////		
+		Actions.click(driver, By.xpath(
+				"(//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='_30oSb']//div[@tabindex=-1])[1]"));
+////	
+		System.out.println("checkbox1");
+}
+//////	
+	System.out.println("forward");
+//////
+	Actions.waittill(8000);
+	driver.findElement(By.xpath("(//div[@class='_2IUvV']//button[@type='button'])[4]")).click();
+	System.out.println("a");
+//////	
+	Actions.waittill(5000);
+	Actions.sendKeys(driver, By.xpath("(//div[@class='_2vDPL']//div//div/p)[1]"), "Trading Layer Prices");
+//	Actions.sendKeys(driver, By.xpath("(//div[@class='_2vDPL']//div//div/p)[1]"), "Forward cull birds");
+//	Actions.sendKeys(driver, By.xpath("(//div[@class='_2vDPL']//div//div/p)[1]"), "Trading Egg Prices");
+	System.out.println("a1");
+////
+	Actions.waittill(5000);
+//	driver.findElement(By.xpath("//div[@class='_199zF 3j691 2N1Gm']")).click();
+	driver.findElement(By.xpath("//div[@class='_199zF _3j691 _2N1Gm'] ")).click();
+
+	//div[@class='_199zF _3j691 _2N1Gm']
+	System.out.println("a2");
+////
+	Actions.waittill(3000);
+	driver.findElement(By.xpath("//div[@class='lhggkp7q j2mzdvlq axi1ht8l mrtez2t4']//div/span")).click();
+	System.out.println("a3");
+////
+	Actions.waittill(9000);
+	Actions.click(driver, By.xpath("(//div[@role='textbox']//p)[1]"));
+	System.out.println("a4");
+////
+//////	
+	Actions.waittill(6000);
+////	Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "https://www.poultryrate.com");
+//	Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "Group vsj");
+//	Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "Cull birds");
+	Actions.sendKeys(driver, By.xpath("//div[@role='textbox']//p"), "POULTRY INDUSTRY LATEST");
+
+//
+	System.out.println("a5");
+////
+//////
+	Actions.waittill(5000);
+	Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'𝗧𝗥𝗬 𝗟𝗔𝗧𝗘𝗦𝗧')]"));
+//	Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'Cull birds')]"));
+//	Actions.click(driver, By.xpath("//div[@class='_21S-L']//span[contains(text(),'WWW.POULTRYRATE.COM')]"));
+	System.out.println("a6");
+
+	
+	
+	boolean check = true;
+	int i = 0;
+	
+//	String table_name = "wa_cull_bird";
+	String table_name = "whatsapp_msgs";
+	
+	Actions.waittill(3000);
+//	ArrayList<String> messegeids = new ArrayList<String>();
+Date currentDate1 = new Date();
+SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+String formattedDate1 = dateFormat.format(currentDate1);
+
+// Declare ArrayLists to store state IDs and prices
+ArrayList<Integer> stateIds = new ArrayList<>();
+ArrayList<Integer> prices = new ArrayList<>();
+
+
+for (i = 0; i < messageCount; i++) {
+
+	while (check) {
+		String readmore = Actions.getText(driver, By.xpath(
+				"(//div[contains(@class, 'message-in')]//div[contains(@class, 'read-more-button')])[1]"));
+
+		if (readmore.equals("Read more")) {
+			Actions.waittill(3000);
+			Actions.click(driver, By.xpath(
+					"(//div[contains(@class, 'message-in')]//div[contains(@class, 'read-more-button')])[1]"));
+		} else {
+			break;
+		}
+	}
+
+	String Message = Actions.getText(driver, By.xpath(
+			"(//div[@class='_3B19s']//div[contains(@class, 'message-in')]//span[contains(@class, 'selectable-text')])["
+					+ (i + 1) + "]"));
+//	String text = "𝗣𝗢𝗨𝗟𝗧𝗥𝗬 7366964640 📞 Bhusawal (MH) rate 540-10=530 for 3rd November";
+	Message=Message.replace("𝗣𝗢𝗨𝗟𝗧𝗥𝗬 𝗜𝗡𝗗𝗨𝗦𝗧𝗥𝗬", "POULTRY INDUSTRY");
+//	text=text.replace("𝗣𝗢𝗨𝗟𝗧𝗥𝗬 𝗜𝗡𝗗𝗨𝗦𝗧𝗥𝗬", "POULTRY INDUSTRY");
+
+//	System.out.println(Message);
+	try {
+		System.out.println(new String(Message.getBytes("UTF-8"), "UTF-8"));
+	} catch (UnsupportedEncodingException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+//	System.out.println(Message);
+	String Group_name = "layer";
+	
+	System.out.println("group_name : " + Group_name);
+
+	Connection connection = Database.con();
+
+//	String insertSql1 = "INSERT INTO `poutry_testdb`.`method_testing` (message) VALUES (?)";
+	String insertSql1 = "INSERT INTO `sunfra_poultry`.`whatsapp_msgs` (group_name,message,posted_date) VALUES (?,?,?)";
+
+
+	try (PreparedStatement ps = connection.prepareStatement(insertSql1)) {
+		System.out.println("entered cull messagedb");
+		ps.setString(1, Group_name);
+		ps.setString(2,Message );
+		ps.setString(3, formattedDate1);
+//		System.out.println(Message);
+
+		ps.executeUpdate();
+//		System.out.println("abcd");
+		System.out.println("successfull");
+		ps.close();//
+		connection.close();//
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+	System.out.println("done with cull db");
+	 String[] lines = Message.split("\n");
+	 Actions.waittill(3000);
+	int count=0;
+	if(Message.contains("Tomorrow Estimated of")) {
+		
+	}
+	else if(Message.contains("Layer Farmer Cull Bird Per Kg Rates")) {
+		System.out.println("am in layer");
+	
+	String[] parts=Message.split("Per Bird");
+	String layerFarmerCullBirdRates = parts[0];
+	System.out.println(layerFarmerCullBirdRates);
+	
+	if (parts.length > 0) {
+        String ratesPart = parts[0].trim(); // Get the first part (contains rates)
+
+
+	Actions.waittill(10000);
+
+	Actions.waittill(3000);
+
+
+	 String[] lines1 = ratesPart.split("\n");
+//		int count = 0;
+	 int load_status = 0;
+		for (String line : lines1)
+		{
+			
+		        Pattern pattern = Pattern.compile("([A-Za-z]+(?: [A-Za-z]+)*)-([0-9/]+)");
+
+
+		        // Create a matcher to find matches in the text
+		        Matcher matcher = pattern.matcher(line);
+
+		        if(!matcher.find()) {
+					continue;
+					
+				}
+
+	        	if(line.contains("Date")) {
+				}
+	        	  
+	        	else if (line.contains("-")) {
+		            String[] splitLine = line.split("-");
+		            String location = splitLine[0].trim();
+		             if (location.contains("Panipat and Surrounding Cull Birds Rates")) {
+		            	    location = "Panipat";
+		            	}
+//		            	System.out.println("Location = " + location);
+
+		            
+		          
+		            
+		            String price = splitLine[1].trim();
+		            
+		             if (price.contains("/")) {
+		    			String[] priceArray = price.split("[/]");
+		    			price = String.valueOf(getAverage(priceArray[0], priceArray[1]));
+		    			
+		    		}else if (price.contains(" (Lifting Rates)")) {
+		                // Remove "(Lifting Rates)" and then extract the number
+		                price = price.replace(" (Lifting Rates)", "");
+		            }
+		     
+		            System.out.println("PRICE =" + price);
+		            System.out.println("Location = " + location);
+		            int stateId = 0;
+					if (location != null) {
+						if (location.equalsIgnoreCase("Bengaluru")) {
+							stateId = 1;
+						} else if (location.equalsIgnoreCase("Namakkal")) {
+							stateId = 2;
+						} else if (location.equalsIgnoreCase("Hospet")) {
+							stateId = 3;
+						} else if (location.equalsIgnoreCase("Mysuru")) {
+							stateId = 4;
+						} else if (location.equalsIgnoreCase("Mangalore")) {
+							stateId = 5;
+						} else if (location.equalsIgnoreCase("Hyderabad")) {
+							stateId = 6;
+						} else if (location.equalsIgnoreCase("Jabalpur")) {
+							stateId = 7;
+						} else if (location.equalsIgnoreCase("Pune")) {
+							stateId = 8;
+						} else if (location.equalsIgnoreCase("Ahmedabad")) {
+							stateId = 9;
+						} else if (location.equalsIgnoreCase("Ajmer")) {
+							stateId = 10;
+						} else if (location.equalsIgnoreCase("Brahmapur")) {
+							stateId = 11;
+						} else if (location.equalsIgnoreCase("Barwala")) {
+							stateId = 12;
+						} else if (location.equalsIgnoreCase("Chennai")) {
+							stateId = 13;
+						} else if (location.equalsIgnoreCase("Chittor")) {
+							stateId = 14;
+						} else if (location.equalsIgnoreCase("Delhi")) {
+							stateId = 15;
+						} else if (location.equalsIgnoreCase("E.Godavari")) {
+							stateId = 16;
+						} else if (location.equalsIgnoreCase("Kolkata")) {
+							stateId = 17;
+						} else if (location.equalsIgnoreCase("Ludhiana")) {
+							stateId = 18;
+						} else if (location.equalsIgnoreCase("Mumbai")) {
+							stateId = 19;
+						} else if (location.equalsIgnoreCase("Raipur")) {
+							stateId = 20;
+						} else if (location.equalsIgnoreCase("Surat")) {
+							stateId = 21;
+						} else if (location.equalsIgnoreCase("Vijayawada")) {
+							stateId = 22;
+						} else if (location.equalsIgnoreCase("Vizag")) {
+							stateId = 23;
+						} else if (location.equalsIgnoreCase("W.Godavari")) {
+							stateId = 24;
+						} else if (location.equalsIgnoreCase("Warangal")) {
+							stateId = 25;
+						} else if (location.equalsIgnoreCase("Patna")) {
+							stateId = 26;
+						}else if (location.equalsIgnoreCase("Anand")) {
+							stateId = 27;
+						}else if (location.equalsIgnoreCase("Godavari")) {
+							stateId = 28;
+						}else if (location.equalsIgnoreCase("Karnal")) {
+							stateId = 29;
+						}else if (location.equalsIgnoreCase("Jharkhand")) {
+							stateId = 30;
+						}else if (location.equalsIgnoreCase("Navapur")) {
+							stateId = 31;
+						}else if (location.equalsIgnoreCase("Panipat")) {
+							stateId = 32;
+						}else if (location.equalsIgnoreCase("Pathankot")) {
+							stateId = 33;
+						}else if (location.equalsIgnoreCase("Punjab")) {
+							stateId = 34;
+						}else if (location.equalsIgnoreCase("Sangrur")) {
+							stateId = 35;
+						}else if (location.equalsIgnoreCase("Uttar Pradesh")) {
+							stateId = 36;
+						}else if (location.equalsIgnoreCase("Rajasthan")) {
+							stateId = 37;
+						}else if (location.equalsIgnoreCase("Bhopal")) {
+							stateId = 38;
+						}else if (location.equalsIgnoreCase("Malegaon")) {
+							stateId = 39;
+						}else if (location.equalsIgnoreCase("Nasik")) {
+							stateId = 40;
+						}
+
+					}
+					
+					System.out.println("State ID = " + stateId);
+					System.out.println("Load Status: " + load_status);
+
+//                    System.out.println("PRICE =" + price );
+					count++;
+					// Execute JavaScript to open a new window
+					((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+//
+//                    // Switch to the child window
+					for (String windowHandle : driver.getWindowHandles()) {
+						driver.switchTo().window(windowHandle);
+
+					} 
+					//
+					String url = "http://poultry.sunfra.in/wa_cullbird_prices?state_id=" + stateId + "&load_status="
+							+ load_status + "&price=" + price  ;
+					System.out.println(url);
+					System.out.println("URL: " + url);
+					driver.get(url); // This line opens the URL in the WebDriver
+
+					driver.switchTo().window(driver.getWindowHandles().iterator().next());
+					Actions.waittill(6000);
+					
+					String time = driver.findElement(By.xpath(
+							"//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n']/span[1]"))
+							.getText();
+					System.out.println(time);
+					
+					Actions.waittill(6000);
+
+					Connection connection1 = Database.con();
+
+					String insertSql = "INSERT INTO `sunfra_poultry`.`wa_cull_bird` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+//					String insertSql = "INSERT INTO `poutry_testdb`.`farmer_cull_bird` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+
+					try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+						ps.setString(1, location);
+						ps.setString(2, price);
+						ps.setString(3, time);
+
+						ps.setString(4, formattedDate1);
+						ps.setInt(5, stateId);
+
+						ps.executeUpdate();
+						
+						System.out.println("successfull");
+						ps.close();
+						connection1.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+
+	        	}
+		           
+			
+
+		}
+		}
+
+	}
+//else if (Message.contains("selling")) 
+//{
+//	
+//}
+else if (Message.contains("Open Loading Range")||(Message.contains("Closed Loading Range"))||(Message.contains("Closed Range Rates") ))
+{
+Actions.waittill(3000);
+
+ int load_status = 1;
+
+	 for (String line : lines) {
+	        Pattern pattern = Pattern.compile("\\b\\d{3}\\b");
+	        Matcher matcher = pattern.matcher(line);
+
+	        if (!matcher.find()) {
+	            continue;
+	        }
+
+	        if (line.contains("-")) {
+	            String[] splitLine = line.split("-");
+	            String location = splitLine[0].trim().replaceAll("\\(.*\\)", "");
+	            String price = splitLine[1].trim();
+	            if (price.contains("/")) {
+	    			String[] priceArray = price.split("[/]");
+	    			price = String.valueOf(getAverage(priceArray[0], priceArray[1]));
+	    			
+	    		}
+	            
+	            System.out.println("Location = " + location);
+	            System.out.println("price = " + price);
+	            
+	            int stateId = 0;
+	  	  					if (location != null) {
+	  	  						if (location.equalsIgnoreCase("Bengaluru")) {
+	  	  							stateId = 1;
+	  	  						} else if (location.equalsIgnoreCase("Namakkal")) {
+	  	  							stateId = 2;
+	  	  						} else if (location.equalsIgnoreCase("Hospet")) {
+	  	  							stateId = 3;
+	  	  						} else if (location.equalsIgnoreCase("Mysuru")) {
+	  	  							stateId = 4;
+	  	  						} else if (location.equalsIgnoreCase("Mangalore")) {
+	  	  							stateId = 5;
+	  	  						} else if (location.equalsIgnoreCase("Hyderabad")) {
+	  	  							stateId = 6;
+	  	  						} else if (location.equalsIgnoreCase("Jabalpur")) {
+	  	  							stateId = 7;
+	  	  						} else if (location.equalsIgnoreCase("Pune")) {
+	  	  							stateId = 8;
+	  	  						} else if (location.equalsIgnoreCase("Ahmedabad")) {
+	  	  							stateId = 9;
+	  	  						} else if (location.equalsIgnoreCase("Ajmer")) {
+	  	  							stateId = 10;
+	  	  						} else if (location.equalsIgnoreCase("Brahmapur")) {
+	  	  							stateId = 11;
+	  	  						} else if (location.equalsIgnoreCase("Barwala")) {
+	  	  							stateId = 12;
+	  	  						} else if (location.equalsIgnoreCase("Chennai")) {
+	  	  							stateId = 13;
+	  	  						} else if (location.equalsIgnoreCase("Chittor")) {
+	  	  							stateId = 14;
+	  	  						} else if (location.equalsIgnoreCase("Delhi")) {
+	  	  							stateId = 15;
+	  	  						} else if (location.equalsIgnoreCase("E.Godavari")) {
+	  	  							stateId = 16;
+	  	  						} else if (location.equalsIgnoreCase("Kolkata")) {
+	  	  							stateId = 17;
+	  	  						} else if (location.equalsIgnoreCase("Ludhiana")) {
+	  	  							stateId = 18;
+	  	  						} else if (location.equalsIgnoreCase("Mumbai")) {
+	  	  							stateId = 19;
+	  	  						} else if (location.equalsIgnoreCase("Raipur")) {
+	  	  							stateId = 20;
+	  	  						} else if (location.equalsIgnoreCase("Surat")) {
+	  	  							stateId = 21;
+	  	  						} else if (location.equalsIgnoreCase("Vijayawada")) {
+	  	  							stateId = 22;
+	  	  						} else if (location.equalsIgnoreCase("Vizag")) {
+	  	  							stateId = 23;
+	  	  						} else if (location.equalsIgnoreCase("W.Godavari")) {
+	  	  							stateId = 24;
+	  	  						} else if (location.equalsIgnoreCase("Warangal")) {
+	  	  							stateId = 25;
+	  	  						} else if (location.equalsIgnoreCase("Patna")) {
+	  	  							stateId = 26;
+	  	  						}else if (location.equalsIgnoreCase("Anand")) {
+	  	  							stateId = 27;
+	  	  						}else if (location.equalsIgnoreCase("Godavari")) {
+	  	  							stateId = 28;
+	  	  						}else if (location.equalsIgnoreCase("Karnal")) {
+	  	  							stateId = 29;
+	  	  						}else if (location.equalsIgnoreCase("Jharkhand")) {
+	  	  							stateId = 30;
+	  	  						}else if (location.equalsIgnoreCase("Navapur")) {
+	  	  							stateId = 31;
+	  	  						}else if (location.equalsIgnoreCase("Panipat")) {
+	  	  							stateId = 32;
+	  	  						}else if (location.equalsIgnoreCase("Pathankot")) {
+	  	  							stateId = 33;
+	  	  						}else if (location.equalsIgnoreCase("Punjab")) {
+	  	  							stateId = 34;
+	  	  						}else if (location.equalsIgnoreCase("Sangrur")) {
+	  	  							stateId = 35;
+	  	  						}else if (location.equalsIgnoreCase("Uttar Pradesh")) {
+	  	  							stateId = 36;
+	  	  						}else if (location.equalsIgnoreCase("Rajasthan")) {
+	  	  							stateId = 37;
+	  	  						}else if (location.equalsIgnoreCase("Bhopal")) {
+	  	  							stateId = 38;
+	  	  						}
+
+	  	  					}
+
+	  	  					System.out.println("State ID = " + stateId);
+							System.out.println("Load Status: " + load_status);
+
+//		                    System.out.println("PRICE =" + price );
+							count++;
+							// Execute JavaScript to open a new window
+							((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+		//
+//		                    // Switch to the child window
+							for (String windowHandle : driver.getWindowHandles()) {
+								driver.switchTo().window(windowHandle);
+		
+							} 
+							//
+
+							String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+									+ load_status + "&price=" + price;
+//////							
+							System.out.println(url);
+							System.out.println("URL: " + url);
+							driver.get(url); // This line opens the URL in the WebDriver
+	////
+							driver.switchTo().window(driver.getWindowHandles().iterator().next());
+							Actions.waittill(9000);
+							
+							String time = driver.findElement(By.xpath(
+									"//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n']/span[1]"))
+									.getText();
+							System.out.println(time);
+							
+							Actions.waittill(6000);
+
+							Connection connection1 = Database.con();
+
+							String insertSql = "INSERT INTO `sunfra_poultry`.`wa_paper` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+//							String insertSql = "INSERT INTO `poutry_testdb`.`farmer_cull_bird` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+
+							try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+								ps.setString(1, location);
+								ps.setString(2, price);
+								ps.setString(3, time);
+
+								ps.setString(4, formattedDate1);
+								ps.setInt(5, stateId);
+
+								ps.executeUpdate();
+								
+								System.out.println("successfull");
+								ps.close();
+								connection1.close();
+
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+	
+}
+	 }
+}
+else if (Message.contains("EGGS")) {
+    Actions.waittill(3000);
+
+//	 int load_status = 0;
+//    for (String line : lines) {
+//        Pattern pattern = Pattern.compile("\\b\\d{3}\\b");
+//        Matcher matcher = pattern.matcher(line);
+//
+//        if (!matcher.find()) {
+//            continue;
+//        }
+//
+//        if (line.contains("-")) {
+//            String[] splitLine = line.split("-");
+//            String location = splitLine[0].trim().replaceAll("\\(.*\\)", "").replace("Association", "").replace("Rate", "");
+//            if (location.equalsIgnoreCase("CHENNAI NORTH")) 
+//            {
+//                continue; // Skip this line and continue to the next line
+//            }
+//
+//            String price = splitLine[1].trim();
+//            
+//            System.out.println("Location = " + location);
+//            System.out.println("price = " + price);
+//            
+//            int stateId = 0;
+//  					if (location != null) {
+//  						if (location.equalsIgnoreCase("Bengaluru")) {
+//  							stateId = 1;
+//  						} else if (location.equalsIgnoreCase("Namakkal")) {
+//  							stateId = 2;
+//  						} else if (location.equalsIgnoreCase("Hospet")) {
+//  							stateId = 3;
+//  						} else if (location.equalsIgnoreCase("Mysuru")) {
+//  							stateId = 4;
+//  						} else if (location.equalsIgnoreCase("Mangalore")) {
+//  							stateId = 5;
+//  						} else if (location.equalsIgnoreCase("Hyderabad")) {
+//  							stateId = 6;
+//  						} else if (location.equalsIgnoreCase("Jabalpur")) {
+//  							stateId = 7;
+//  						} else if (location.equalsIgnoreCase("Pune")) {
+//  							stateId = 8;
+//  						} else if (location.equalsIgnoreCase("Ahmedabad")) {
+//  							stateId = 9;
+//  						} else if (location.equalsIgnoreCase("Ajmer")) {
+//  							stateId = 10;
+//  						} else if (location.equalsIgnoreCase("Brahmapur")) {
+//  							stateId = 11;
+//  						} else if (location.equalsIgnoreCase("Barwala")) {
+//  							stateId = 12;
+//  						} else if (location.equalsIgnoreCase("Chennai")) {
+//  							stateId = 13;
+//  						} else if (location.equalsIgnoreCase("Chittor")) {
+//  							stateId = 14;
+//  						} else if (location.equalsIgnoreCase("Delhi")) {
+//  							stateId = 15;
+//  						} else if (location.equalsIgnoreCase("E.Godavari")) {
+//  							stateId = 16;
+//  						} else if (location.equalsIgnoreCase("Kolkata")) {
+//  							stateId = 17;
+//  						} else if (location.equalsIgnoreCase("Ludhiana")) {
+//  							stateId = 18;
+//  						} else if (location.equalsIgnoreCase("Mumbai")) {
+//  							stateId = 19;
+//  						} else if (location.equalsIgnoreCase("Raipur")) {
+//  							stateId = 20;
+//  						} else if (location.equalsIgnoreCase("Surat")) {
+//  							stateId = 21;
+//  						} else if (location.equalsIgnoreCase("Vijayawada")) {
+//  							stateId = 22;
+//  						} else if (location.equalsIgnoreCase("Vizag")) {
+//  							stateId = 23;
+//  						} else if (location.equalsIgnoreCase("W.Godavari")) {
+//  							stateId = 24;
+//  						} else if (location.equalsIgnoreCase("Warangal")) {
+//  							stateId = 25;
+//  						} else if (location.equalsIgnoreCase("Patna")) {
+//  							stateId = 26;
+//  						}else if (location.equalsIgnoreCase("Anand")) {
+//  							stateId = 27;
+//  						}else if (location.equalsIgnoreCase("Godavari")) {
+//  							stateId = 28;
+//  						}else if (location.equalsIgnoreCase("Karnal")) {
+//  							stateId = 29;
+//  						}else if (location.equalsIgnoreCase("Jharkhand")) {
+//  							stateId = 30;
+//  						}else if (location.equalsIgnoreCase("Navapur")) {
+//  							stateId = 31;
+//  						}else if (location.equalsIgnoreCase("Panipat")) {
+//  							stateId = 32;
+//  						}else if (location.equalsIgnoreCase("Pathankot")) {
+//  							stateId = 33;
+//  						}else if (location.equalsIgnoreCase("Punjab")) {
+//  							stateId = 34;
+//  						}else if (location.equalsIgnoreCase("Sangrur")) {
+//  							stateId = 35;
+//  						}else if (location.equalsIgnoreCase("Uttar Pradesh")) {
+//  							stateId = 36;
+//  						}else if (location.equalsIgnoreCase("Rajasthan")) {
+//  							stateId = 37;
+//  						}else if (location.equalsIgnoreCase("Bhopal")) {
+//  							stateId = 38;
+//  						}
+//
+//  					}
+//
+//  					System.out.println("State ID = " + stateId);
+//					System.out.println("Load Status: " + load_status);
+
+//                    System.out.println("PRICE =" + price );
+//					count++;
+					// Execute JavaScript to open a new window
+//					((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+//
+//                    // Switch to the child window
+//					for (String windowHandle : driver.getWindowHandles()) {
+//						driver.switchTo().window(windowHandle);
+//
+//					} 
+					//
+
+//					String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+//							+ load_status + "&price=" + price;
+//////					
+//					System.out.println(url);
+//					System.out.println("URL: " + url);
+//					driver.get(url); // This line opens the URL in the WebDriver
+////
+//					driver.switchTo().window(driver.getWindowHandles().iterator().next());
+//					Actions.waittill(9000);
+//					
+//					String time = driver.findElement(By.xpath(
+//							"//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n']/span[1]"))
+//							.getText();
+//					System.out.println(time);
+//					
+//					Actions.waittill(6000);
+//
+//					Connection connection1 = Database.con();
+
+//					String insertSql = "INSERT INTO `sunfra_poultry`.`wa_paper` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+////					String insertSql = "INSERT INTO `poutry_testdb`.`farmer_cull_bird` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+//
+//					try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+//						ps.setString(1, location);
+//						ps.setString(2, price);
+//						ps.setString(3, time);
+//
+//						ps.setString(4, formattedDate1);
+//						ps.setInt(5, stateId);
+//
+//						ps.executeUpdate();
+//
+//						System.out.println("successfull");
+//    					ps.close();
+//    					connection1.close();
+//
+//					} catch (SQLException e) {
+//						e.printStackTrace();
+//					}
+//
+//	        	}		
+//            	        }
+    List<String> normalPrices = new ArrayList<>();
+    List<String> loadingSellingPrices = new ArrayList<>();
+    List<String> neccPrices = new ArrayList<>();
+
+    for (String line : lines) {
+        if (line.contains("EGGS")) {
+            neccPrices.add(line);
+        } else if (line.contains("Loading") || line.contains("selling")) {
+            loadingSellingPrices.add(line);
+        } else {
+            normalPrices.add(line);
+        }
+//        if (!load_status.isEmpty()) {
+//            System.out.println("Load status = " + load_status);
+//        }
+    }
+
+    System.out.println("paper_rate:");
+    for (String line : normalPrices) {
+        paper_rates(line,driver);
+    }
+
+    System.out.println("loading_rate:");
+    for (String line : loadingSellingPrices) {
+        loading_rates(line,driver);
+    }
+
+}
+	else if (Message.contains("Paper rate for"))
+	{
+		
+int load_status = 0;
+String date2="";
+for (String line : lines) {
+	
+	if (line.contains("Paper rate for")) {
+        String date = line.split("Paper rate for")[1].trim();
+        System.out.println(date);
+
+        String inputDateStr =date ; 
+        // Custom parser to remove suffix ("th", "st", "nd", "rd") from the day
+        inputDateStr = inputDateStr.replaceAll("(?<=\\d)(?:st|nd|rd|th)", "");
+
+        inputDateStr = inputDateStr + " 2023"; 
+        // Create SimpleDateFormat objects
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd MMMM yyyy");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date date1 = inputFormat.parse(inputDateStr);
+             date2=outputFormat.format(date1);
+
+            System.out.println("Original Date: " + inputDateStr);
+            System.out.println("Formatted Date: " + date2);
+        } catch (ParseException e) {
+            System.err.println("Error parsing date: " + e.getMessage());
+        }
+        
+    }
+        
+	Pattern regex = Pattern.compile("\\b\\d{3}\\b");
+	Matcher matcher = regex.matcher(line);
+	if(!matcher.find()) {
+		continue;
+	}
+	if(line.contains("CHENNAI NORTH")) {
+	}
+	 if(line.contains("-")) {
+		 String[] splitLine = line.split("-");
+       String location = splitLine[0].trim().replace("Trading", "");
+       if (location.equalsIgnoreCase("CHENNAI NORTH")) 
+         {
+             continue; 
+         }
+         String price = splitLine[1].trim();
+         System.out.println("Location = " + location);
+         System.out.println("price = " + price);
+         
+         int stateId = 0;
+		if (location != null) {
+			if (location.equalsIgnoreCase("Bengaluru")) {
+				stateId = 1;
+			} else if (location.equalsIgnoreCase("Namakkal")) {
+				stateId = 2;
+			} else if (location.equalsIgnoreCase("Hospet")) {
+				stateId = 3;
+			} else if (location.equalsIgnoreCase("Mysuru")) {
+				stateId = 4;
+			} else if (location.equalsIgnoreCase("Mangalore")) {
+				stateId = 5;
+			} else if (location.equalsIgnoreCase("Hyderabad")) {
+				stateId = 6;
+			} else if (location.equalsIgnoreCase("Jabalpur")) {
+				stateId = 7;
+			} else if (location.equalsIgnoreCase("Pune")) {
+				stateId = 8;
+			} else if (location.equalsIgnoreCase("Ahmedabad")) {
+				stateId = 9;
+			} else if (location.equalsIgnoreCase("Ajmer")) {
+				stateId = 10;
+			} else if (location.equalsIgnoreCase("Brahmapur")) {
+				stateId = 11;
+			} else if (location.equalsIgnoreCase("Barwala")) {
+				stateId = 12;
+			} else if (location.equalsIgnoreCase("Chennai")) {
+				stateId = 13;
+			} else if (location.equalsIgnoreCase("Chittor")) {
+				stateId = 14;
+			} else if (location.equalsIgnoreCase("Delhi")) {
+				stateId = 15;
+			} else if (location.equalsIgnoreCase("E.Godavari")) {
+				stateId = 16;
+			} else if (location.equalsIgnoreCase("Kolkata")) {
+				stateId = 17;
+			} else if (location.equalsIgnoreCase("Ludhiana")) {
+				stateId = 18;
+			} else if (location.equalsIgnoreCase("Mumbai")) {
+				stateId = 19;
+			} else if (location.equalsIgnoreCase("Raipur")) {
+				stateId = 20;
+			} else if (location.equalsIgnoreCase("Surat")) {
+				stateId = 21;
+			} else if (location.equalsIgnoreCase("Vijaywada")) {
+				stateId = 22;
+			} else if (location.equalsIgnoreCase("Vizag")) {
+				stateId = 23;
+			} else if (location.equalsIgnoreCase("W.Godavari")) {
+				stateId = 24;
+			} else if (location.equalsIgnoreCase("Warangal")) {
+				stateId = 25;
+			} else if (location.equalsIgnoreCase("Patna")) {
+				stateId = 26;
+			}
+
+		}
+
+		System.out.println("State ID = " + stateId);
+		System.out.println("Load Status: " + load_status);
+
+		count++;
+	// Execute JavaScript to open a new window
+		((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+//
+//        // Switch to the child window
+		for (String windowHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(windowHandle);
+
+		}
+
+		String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+				+ load_status + "&price=" + price + "&date="+ date2 ; 
+		System.out.println("URL: " + url);
+		driver.get(url); // This line opens the URL in the WebDriver
+
+		driver.switchTo().window(driver.getWindowHandles().iterator().next());
+		Actions.waittill(6000);
+
+		String time = driver.findElement(By.xpath(
+				"//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n']/span[1]"))
+				.getText();
+		System.out.println(time);
+		Connection connection1 = Database.con();
+
+		String insertSql = "INSERT INTO `sunfra_poultry`.`wa_paper` (location, price ,time,storedtime,state_id) VALUES (?, ? , ? ,?,?)";
+
+//		String insertSql = "INSERT INTO `poutry_testdb`.`tomorrow_paper_rate` (location, price ,time,storedtime,state_id) VALUES (?, ? , ? ,?,?)";
+
+		try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+
+			ps.setString(1, location);
+			ps.setString(2, price);
+			ps.setString(3, time);
+			ps.setString(4, formattedDate1);
+			ps.setInt(5, stateId);
+
+			ps.executeUpdate();
+			
+			System.out.println("successfull");
+			ps.close();
+			connection1.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+}
+}
+	else if(Message.contains("necc rate") || Message.contains("Declared rate")||Message.contains("revised rate"))
+	{
+		
+			int load_status=0;
+			String date2="";
+			String date3="";
+			LocalDate currentDate_W = LocalDate.now();
+			DateTimeFormatter formatter_W = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String formattedDate_W = currentDate_W.format(formatter_W);
+//			System.out.println("Windows date");
+			System.out.println("Windows date :"+formattedDate_W);
+			
+		
+			for(String line : lines) {
+				 line=line.trim().replace("same", "");
+				 if(line.contains("for")) 
+				 {
+
+				        String date = line.split("for")[1].trim();
+//				        System.out.println(date);
+
+			  	       
+				        String inputDateStr =date ; 
+				        // Custom parser to remove suffix ("th", "st", "nd", "rd") from the day
+				        inputDateStr = inputDateStr.replaceAll("(?<=\\d)(?:st|nd|rd|th)", "");
+
+				        inputDateStr = inputDateStr + " 2023"; 
+				        // Create SimpleDateFormat objects
+				        SimpleDateFormat inputFormat = new SimpleDateFormat("dd MMMM yyyy");
+				        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+				        try {
+				            Date date1 = inputFormat.parse(inputDateStr);
+				             date2=outputFormat.format(date1);
+				             System.out.println("Message date:");
+				            System.out.println("Original Date: " + inputDateStr);
+				            System.out.println("Formatted Date: " + date2);
+				        } catch (ParseException e) {
+				            System.err.println("Error parsing date: " + e.getMessage());
+				        }
+				 }
+				Pattern pattern = Pattern.compile("\\b\\d{3}\\b");
+				Matcher matcher = pattern.matcher(line);
+			        if (!matcher.find()) {
+			            continue;
+			        }
+			        if(line.contains("rate")) {
+			        	String[] splitline=line.split("rate");
+			        	String location="";
+			        	String price="";
+			        	if(line.contains("+") && line.contains("=")|| line.contains("-")&& line.contains("=")) {
+			        		String []left=splitline[0].split(" ");
+			        		location=location+left[0];
+			        		if(location.contains("West")) {
+			        			location="Kolkata";
+			        		}
+			        		String []right=splitline[1].split("=");
+			        		String[] right_side=right[1].split(" ");
+			        		price=price+right_side[0];
+				        		
+			        	}
+			        	else {
+			        		String []left=splitline[0].split(" ");
+			        		location=location+left[0];
+			        		if(location.contains("West")) {
+			        			location="Kolkata";
+			        		}
+//			        		System.out.println("-------->"+splitline[1]);
+			        		String[] right=splitline[1].split("for");
+			        		
+			        		price=price+right[0].trim();
+
+						}
+			        	  int stateId = 0;
+			      		if (location != null) {
+			      			if (location.equalsIgnoreCase("Bengaluru")) {
+			      				stateId = 1;
+			      			} else if (location.equalsIgnoreCase("Namakkal")) {
+			      				stateId = 2;
+			      			} else if (location.equalsIgnoreCase("Hospet")) {
+			      				stateId = 3;
+			      			} else if (location.equalsIgnoreCase("Mysuru")) {
+			      				stateId = 4;
+			      			} else if (location.equalsIgnoreCase("Mangalore")) {
+			      				stateId = 5;
+			      			} else if (location.equalsIgnoreCase("Hyderabad")) {
+			      				stateId = 6;
+			      			} else if (location.equalsIgnoreCase("Jabalpur")) {
+			      				stateId = 7;
+			      			} else if (location.equalsIgnoreCase("Pune")) {
+			      				stateId = 8;
+			      			} else if (location.equalsIgnoreCase("Ahmedabad")) {
+			      				stateId = 9;
+			      			} else if (location.equalsIgnoreCase("Ajmer")) {
+			      				stateId = 10;
+			      			} else if (location.equalsIgnoreCase("Brahmapur")) {
+			      				stateId = 11;
+			      			} else if (location.equalsIgnoreCase("Barwala")) {
+			      				stateId = 12;
+			      			} else if (location.equalsIgnoreCase("Chennai")) {
+			      				stateId = 13;
+			      			} else if (location.equalsIgnoreCase("Chittor")) {
+			      				stateId = 14;
+			      			} else if (location.equalsIgnoreCase("Delhi")) {
+			      				stateId = 15;
+			      			} else if (location.equalsIgnoreCase("E.Godavari")) {
+			      				stateId = 16;
+			      			} else if (location.equalsIgnoreCase("Kolkata")) {
+			      				stateId = 17;
+			      			} else if (location.equalsIgnoreCase("Ludhiana")) {
+			      				stateId = 18;
+			      			} else if (location.equalsIgnoreCase("Mumbai")) {
+			      				stateId = 19;
+			      			} else if (location.equalsIgnoreCase("Raipur")) {
+			      				stateId = 20;
+			      			} else if (location.equalsIgnoreCase("Surat")) {
+			      				stateId = 21;
+			      			} else if (location.equalsIgnoreCase("Vijaywada")) {
+			      				stateId = 22;
+			      			} else if (location.equalsIgnoreCase("Vizag")) {
+			      				stateId = 23;
+			      			} else if (location.equalsIgnoreCase("W.Godavari")) {
+			      				stateId = 24;
+			      			} else if (location.equalsIgnoreCase("Warangal")) {
+			      				stateId = 25;
+			      			} else if (location.equalsIgnoreCase("Patna")) {
+			      				stateId = 26;
+			      			}
+
+			      		}
+			        	System.out.println("Location = " + location);
+			            System.out.println("price = " + price);
+			            System.out.println("State ID = " + stateId);
+			    		System.out.println("Load Status: " + load_status);
+			            
+			            
+			            if(date2.equals(formattedDate_W)) {
+			            	((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+			            	//
+//			            	        // Switch to the child window
+			            			for (String windowHandle : driver.getWindowHandles()) {
+			            				driver.switchTo().window(windowHandle);
+
+			            			}
+				    		String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+				    				+ load_status + "&price=" + price;
+				    		System.out.println("URL: " + url);
+				    		driver.get(url);
+		    				driver.switchTo().window(driver.getWindowHandles().iterator().next());
+
+				    		
+				    		}
+				    		else {
+				    			((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+				    			//
+//				    			        // Switch to the child window
+				    					for (String windowHandle : driver.getWindowHandles()) {
+				    						driver.switchTo().window(windowHandle);
+
+				    					}
+				    			String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+					    				+ load_status + "&price=" + price+ "&date="+date2;
+					    		System.out.println("URL: " + url);
+					    		
+					    		driver.get(url); // This line opens the URL in the WebDriver
+					    		driver.switchTo().window(driver.getWindowHandles().iterator().next());
+
+				    		}
+//					    				driver.switchTo().window(driver.getWindowHandles().iterator().next());
+					    				Actions.waittill(9000);
+					    				
+					    				String time = driver.findElement(By.xpath(
+					    						"//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n']/span[1]"))
+					    						.getText();
+					    				System.out.println(time);
+					    				
+					    				Actions.waittill(6000);
+
+										Connection connection1 = Database.con();
+
+					    				String insertSql = "INSERT INTO `sunfra_poultry`.`wa_paper` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+//					    				String insertSql = "INSERT INTO `poutry_testdb`.`farmer_cull_bird` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+
+					    				try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+					    					ps.setString(1, location);
+					    					ps.setString(2, price);
+					    					ps.setString(3, time);
+
+					    					ps.setString(4, formattedDate1);
+					    					ps.setInt(5, stateId);
+
+					    					ps.executeUpdate();
+
+					    					System.out.println("successfull");
+					    					ps.close();
+					    					connection1.close();
+					    				} catch (SQLException e) {
+					    					e.printStackTrace();
+					    				}
+
+				    		}
+			            
+			            
+		
+			        }
+			}
+	
+	else if(Message.contains("Feeds")) {
+		
+		String []check1=Message.split("\n");
+		String date_feed="";
+	
+		String[] first_part=Message.split("Mustard De");
+		if(first_part[0].contains("DORB Rates")) {
+			String[] lin = first_part[0].split("\n");		
+			String category="";
+			for(String line : lin) {
+				String location="";
+				String price="";								
+				if(line.contains("DORB Rates")) {
+					category=category+line;
+				}
+				else if(line.contains("-")) {
+					String[] Seperate_line=line.split("-");
+					location=location+Seperate_line[0];
+					price=price+Seperate_line[1];
+					System.out.println("Category : "+category);
+					System.out.println("Location : "+location);
+					System.out.println("price : "+price);
+//					if(date_feed.equals(formattedDate_feed)) {
+					((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+						
+					for (String windowHandle : driver.getWindowHandles()) {
+					driver.switchTo().window(windowHandle);
+					} 
+					String url="http://poultry.sunfra.in/wa_feed_prices?category=" +category+ "&location=" +location+ "&price=" +price;
+					System.out.println("Url :"+url);
+					System.out.println("URL: " + url);
+					Actions.waittill(2000);
+
+					driver.get(url); // This line opens the URL in the WebDriver
+					Actions.waittill(2000);
+
+					driver.switchTo().window(driver.getWindowHandles().iterator().next());
+					}
+				}
+			}			
+//	   }
+		 String[] two_part=first_part[1].split("Soya De");
+		 	String oneplace="Mustard De"+two_part[0];
+//		 	System.out.println(oneplace);
+		 if(oneplace.contains("Mustard De")) {
+			   String[] lin = oneplace.split("\n");
+			   
+			   String category="";
+			   for(String line : lin) {
+				   String location="";
+				   String price="";								
+				   if(line.contains("Mustard De")) {
+					   category=category+line;
+				   }
+				   else if(line.contains("-")) {
+					   String[] Seperate_line=line.split("-");
+					   if(Seperate_line.length==2) {
+					   location=location+Seperate_line[0];
+					   price=price+Seperate_line[1];
+					   System.out.println("Category : "+category);
+					   System.out.println("Location : "+location);
+					   System.out.println("price : "+price);
+//					   if(date_feed.equals(formattedDate_feed)) {
+						   ((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+							
+							for (String windowHandle : driver.getWindowHandles()) {
+							driver.switchTo().window(windowHandle);
+							} 
+					   String url="http://poultry.sunfra.in/wa_feed_prices?category=" +category+ "&location=" +location+ "&price=" +price;
+					   System.out.println("Url :"+url);
+					   System.out.println("URL: " + url);
+						Actions.waittill(2000);
+
+						driver.get(url); // This line opens the URL in the WebDriver
+						Actions.waittill(2000);
+
+						driver.switchTo().window(driver.getWindowHandles().iterator().next());
+					   }
+//				   }
+					   else if(Seperate_line.length==3) {
+						   String ele=Seperate_line[0]+" "+Seperate_line[1];
+						   location=location+ele;
+						   price=price+Seperate_line[2];
+						   System.out.println("Category : "+category);
+						   System.out.println("Location : "+location);
+						   System.out.println("price : "+price);
+//						   if(date_feed.equals(formattedDate_feed)) {
+							   ((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+								
+								for (String windowHandle : driver.getWindowHandles()) {
+								driver.switchTo().window(windowHandle);
+								} 
+						   String url="http://poultry.sunfra.in/wa_feed_prices?category=" +category+ "&location=" +location+ "&price=" +price;
+						   System.out.println("Url :"+url);
+						   System.out.println("URL: " + url);
+							Actions.waittill(2000);
+
+							driver.get(url); // This line opens the URL in the WebDriver
+							Actions.waittill(2000);
+
+							driver.switchTo().window(driver.getWindowHandles().iterator().next());
+//						   }
+					   }
+				}
+			}																									 
+	   }
+		 String place="Soya De"+two_part[1];						 
+		 if(place.contains("Soya De")) {
+			   String[] lin = place.split("\n");		
+			   String category="";
+			   for(String line : lin) {
+				   String location="";
+				   String price="";								
+				   if(line.contains("Soya De")) {
+					   category=category+line;
+				   }
+				   else if(line.contains("-")) {
+					   String[] Seperate_line=line.split("-");
+					   if(Seperate_line.length==2) {
+					   location=location+Seperate_line[0];
+					   price=price+Seperate_line[1];
+					   if(price.contains("(")) {
+						   String []pass=price.split(" ");
+						   price=pass[0];
+					   }
+					   System.out.println("Category : "+category);
+					   System.out.println("Location : "+location);
+					   System.out.println("price : "+price);
+//					   if(date_feed.equals(formattedDate_feed)) {
+						   ((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+							
+							for (String windowHandle : driver.getWindowHandles()) {
+							driver.switchTo().window(windowHandle);
+							} 
+					   String url="http://poultry.sunfra.in/wa_feed_prices?category=" +category+ "&location=" +location+ "&price=" +price;
+					   System.out.println("Url :"+url);
+					   System.out.println("URL: " + url);
+						Actions.waittill(2000);
+
+						driver.get(url); // This line opens the URL in the WebDriver
+						Actions.waittill(2000);
+
+						driver.switchTo().window(driver.getWindowHandles().iterator().next());
+//					   }
+					   } else if(Seperate_line.length==3) {
+						   String ele=Seperate_line[0]+" "+Seperate_line[1];
+						   location=location+ele;
+						   price=price+Seperate_line[2];
+						   System.out.println("Category : "+category);
+						   System.out.println("Location : "+location);
+						   System.out.println("price : "+price);
+//						   if(date_feed.equals(formattedDate_feed)) {
+							   ((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+								
+								for (String windowHandle : driver.getWindowHandles()) {
+								driver.switchTo().window(windowHandle);
+								} 
+						   String url="http://poultry.sunfra.in/wa_feed_prices?category=" +category+ "&location=" +location+ "&price=" +price;
+						   System.out.println("Url :"+url);
+						   System.out.println("URL: " + url);
+							Actions.waittill(2000);
+
+						   driver.get(url); // This line opens the URL in the WebDriver
+							Actions.waittill(2000);
+
+							driver.switchTo().window(driver.getWindowHandles().iterator().next());
+//						   }
+					   }
+				   }
+			}		 
+	   }
+		
+	}
+
+		
+	
+	
+	
+	else {
+
+		System.out.println("not ........in .......layer");
+
+	}
+}
+return messageCount;
+
+ }
+
+public static String[] getLocationAndPrice(String line) {
+	if (line.contains("/")) {
+		line = line.split("[/]")[0];
+	}
+	String[] arr = line.split(" ");
+	String location = arr[0];
+
+	String price = arr[arr.length - 1];
+	String regex = "\\b\\d{3}\\b";
+	boolean contains3Digits = price.matches(".*" + regex + ".*");
+	price = contains3Digits ? arr[arr.length - 1] : arr[arr.length - 2];
+	if (price.contains("-")) {
+		String[] priceArray = price.split("[-]");
+		price = String.valueOf(getAverage(priceArray[0], priceArray[1]));
+	}
+	String[] locationAndPrice = { location, price };
+	return locationAndPrice;
+}
+
+public static int getAverage(String a, String b)
+   {
+	return (int) ((Integer.parseInt(a) + Integer.parseInt(b)) / (double) 2);
+   }
+public static void delete(WebDriver driver, int msgCount2)
+{
+	driver.findElement(By.xpath("//div[@class='_3vsRF']//div[@aria-label='Menu']/span")).click();
+	System.out.println("menu");
+	Actions.waittill(10000);
+	driver.findElement(By.xpath("//li[@class='jScby Iaqxu FCS6Q']//div[contains(text(),'Select messages')]")).click();
+	Actions.waittill(5000);
+	
+	for ( int i = 1; i <=msgCount2; i++)
+	{
+       Actions.waittill(10000);
+		
+		Actions.click(driver, By.xpath(
+				"(//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='_30oSb']//div[@tabindex=-1])[1]"));
+	
+	System.out.println("checkbox2" + msgCount2);
+	}
+	Actions.waittill(4000);
+	driver.findElement(By.xpath("(//div[@class='_2IUvV']//button[@type='button'])[3]")).click();
+	System.out.println("dele");
+	Actions.waittill(10000);
+	Actions.waittill(5000);
+	driver.findElement(By.xpath("//div/button//div//div[contains(text(),'Delete for me')]")).click();
+	Actions.waittill(10000);
+	System.out.println("delete for me");
+	
+//	driver.close();
+   
+
+
+}
+
+public static void paper_rates(String line,WebDriver driver) throws SQLException {
+	int load_status = 0;
+//	Connection connection = Database.con();
+	LocalDate currentDate = LocalDate.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+	// Format the current date using the formatter
+	String formattedDate = currentDate.format(formatter);
+	// Print the formatted date
+	System.out.println(formattedDate);
+	Date currentDate1 = new Date();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String formattedDate1 = dateFormat.format(currentDate1);
+
+    String[] parts = line.split("-");
+    if (parts.length >= 2) {
+    	
+        String location = parts[0].trim().replace("Layer Farmer Association", "").replace("BFTA ", "").replace("Association", "").replace("Zonal Rate", "").replace("(Tanuku)", "").replace("NECC", "").replace("(Orissa)", "").replace("(Orissa)", "");
+        if(line.contains("Varanasi")) 
+        {
+        	return;
+		}
+        if(line.contains("Chennai Manager Association")) 
+        {
+        	return;
+		}
+        if(line.contains("Kolkata")) 
+        {
+        	return;
+		}
+        String price = parts[1].trim().replaceAll("\\(.*\\)", "");
+
+        System.out.println("Location = " + location);
+        System.out.println("Price = " + price);
+        int stateId = 0;
+		if (location != null) {
+			if (location.equalsIgnoreCase("Bengaluru")) {
+				stateId = 1;
+			} else if (location.equalsIgnoreCase("Namakkal")) {
+				stateId = 2;
+			} else if (location.equalsIgnoreCase("Hospet")) {
+				stateId = 3;
+			} else if (location.equalsIgnoreCase("Mysuru")) {
+				stateId = 4;
+			} else if (location.equalsIgnoreCase("Mangalore")) {
+				stateId = 5;
+			} else if (location.equalsIgnoreCase("Hyderabad")||location.equalsIgnoreCase("Hyderabad NECC")) {
+				stateId = 6;
+			} else if (location.equalsIgnoreCase("Jabalpur")) {
+				stateId = 7;
+			} else if (location.equalsIgnoreCase("Pune")) {
+				stateId = 8;
+			} else if (location.equalsIgnoreCase("Ahmedabad")) {
+				stateId = 9;
+			} else if (location.equalsIgnoreCase("Ajmer")) {
+				stateId = 10;
+			} else if (location.equalsIgnoreCase("Brahampur")||location.equalsIgnoreCase("Brahmapur")) {
+				stateId = 11;
+			} else if (location.equalsIgnoreCase("Barwala")||location.equalsIgnoreCase("BFTA Barwala")) {
+				stateId = 12;
+			} else if (location.equalsIgnoreCase("Chennai")) {
+				stateId = 13;
+			} else if (location.equalsIgnoreCase("Chittor")) {
+				stateId = 14;
+			} else if (location.equalsIgnoreCase("Delhi")) {
+				stateId = 15;
+			} else if (location.equalsIgnoreCase("E.Godavari")) {
+				stateId = 16;
+			} else if (location.equalsIgnoreCase("Kolkata")) {
+				stateId = 17;
+			} else if (location.equalsIgnoreCase("Ludhiana")) {
+				stateId = 18;
+			} else if (location.equalsIgnoreCase("Mumbai")) {
+				stateId = 19;
+			} else if (location.equalsIgnoreCase("Raipur")) {
+				stateId = 20;
+			} else if (location.equalsIgnoreCase("Surat")) {
+				stateId = 21;
+			} else if (location.equalsIgnoreCase("Vijayawada")) {
+				stateId = 22;
+			} else if (location.equalsIgnoreCase("Vizag")) {
+				stateId = 23;
+			} else if (location.equalsIgnoreCase("W.Godavari")) {
+				stateId = 24;
+			} else if (location.equalsIgnoreCase("Warangal")) {
+				stateId = 25;
+			} else if (location.equalsIgnoreCase("Patna")) {
+				stateId = 26;
+			}
+
+		}
+
+		System.out.println("State ID = " + stateId);
+		System.out.println("load status ="+ load_status );
+		// Execute JavaScript to open a new window
+		((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+//
+//        // Switch to the child window
+		for (String windowHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(windowHandle);
+
+		}
+//
+		String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+				+ load_status + "&price=" + price;
+		System.out.println("URL: " + url);
+		driver.get(url); // This line opens the URL in the WebDriver
+//
+		driver.switchTo().window(driver.getWindowHandles().iterator().next());
+		Actions.waittill(9000);
+		
+		String time = driver.findElement(By.xpath(
+				"//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n']/span[1]"))
+				.getText();
+		System.out.println(time);
+		
+		Actions.waittill(6000);
+
+		Connection connection1 = Database.con();
+
+		String insertSql = "INSERT INTO `sunfra_poultry`.`wa_paper` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+//		String insertSql = "INSERT INTO `poutry_testdb`.`farmer_cull_bird` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+
+		try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+			ps.setString(1, location);
+			ps.setString(2, price);
+			ps.setString(3, time);
+
+			ps.setString(4, formattedDate1);
+			ps.setInt(5, stateId);
+
+			ps.executeUpdate();
+
+			System.out.println("successfull");
+			ps.close();
+			connection1.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}		
+	        }
+
+
+
+public static void loading_rates(String line,WebDriver driver) throws SQLException {
+//	Connection connection = Database.con();
+	LocalDate currentDate = LocalDate.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+	// Format the current date using the formatter
+	String formattedDate = currentDate.format(formatter);
+	// Print the formatted date
+	System.out.println(formattedDate);
+	Date currentDate1 = new Date();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String formattedDate1 = dateFormat.format(currentDate1);
+	int load_status = 1;
+//	String load_status = "1";
+    String[] parts = line.split("-");
+    if (parts.length >= 2) {
+        String location = parts[0].replace("Loading", "").replace("selling", "").trim();
+        String price = parts[1].trim();
+
+        System.out.println("Location  = " + location);
+        System.out.println("Price = " + price);
+        int stateId = 0;
+		if (location != null) {
+			if (location.equalsIgnoreCase("Bengaluru")) {
+				stateId = 1;
+			} else if (location.equalsIgnoreCase("Namakkal")) {
+				stateId = 2;
+			} else if (location.equalsIgnoreCase("Hospet")) {
+				stateId = 3;
+			} else if (location.equalsIgnoreCase("Mysuru")) {
+				stateId = 4;
+			} else if (location.equalsIgnoreCase("Mangalore")) {
+				stateId = 5;
+			} else if (location.equalsIgnoreCase("Hyderabad")) {
+				stateId = 6;
+			} else if (location.equalsIgnoreCase("Jabalpur")) {
+				stateId = 7;
+			} else if (location.equalsIgnoreCase("Pune")) {
+				stateId = 8;
+			} else if (location.equalsIgnoreCase("Ahmedabad")) {
+				stateId = 9;
+			} else if (location.equalsIgnoreCase("Ajmer")) {
+				stateId = 10;
+			} else if (location.equalsIgnoreCase("Brahmapur")) {
+				stateId = 11;
+			} else if (location.equalsIgnoreCase("Barwala")) {
+				stateId = 12;
+			} else if (location.equalsIgnoreCase("Chennai")) {
+				stateId = 13;
+			} else if (location.equalsIgnoreCase("Chittor")) {
+				stateId = 14;
+			} else if (location.equalsIgnoreCase("Delhi")) {
+				stateId = 15;
+			} else if (location.equalsIgnoreCase("E.Godavari")) {
+				stateId = 16;
+			} else if (location.equalsIgnoreCase("Kolkata")) {
+				stateId = 17;
+			} else if (location.equalsIgnoreCase("Ludhiana")) {
+				stateId = 18;
+			} else if (location.equalsIgnoreCase("Mumbai")) {
+				stateId = 19;
+			} else if (location.equalsIgnoreCase("Raipur")) {
+				stateId = 20;
+			} else if (location.equalsIgnoreCase("Surat")) {
+				stateId = 21;
+			} else if (location.equalsIgnoreCase("Vijayawada")) {
+				stateId = 22;
+			} else if (location.equalsIgnoreCase("Vizag")) {
+				stateId = 23;
+			} else if (location.equalsIgnoreCase("W.Godavari")) {
+				stateId = 24;
+			} else if (location.equalsIgnoreCase("Warangal")) {
+				stateId = 25;
+			} else if (location.equalsIgnoreCase("Patna")) {
+				stateId = 26;
+			}
+
+		}
+		System.out.println("State ID = " + stateId);
+		System.out.println("load status ="+ load_status );
+		((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+		//
+//		        // Switch to the child window
+				for (String windowHandle : driver.getWindowHandles()) {
+					driver.switchTo().window(windowHandle);
+
+				}
+		//
+				String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+						+ load_status + "&price=" + price;
+				System.out.println("URL: " + url);
+				driver.get(url); // This line opens the URL in the WebDriver
+		//
+				driver.switchTo().window(driver.getWindowHandles().iterator().next());
+
+//		System.out.println("State ID = " + stateId);
+//        
+//		System.out.println("load status ="+ load_status );
+	Actions.waittill(9000);
+		
+		String time = driver.findElement(By.xpath(
+				"//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='gq1t1y46 o38k74y6 e4p1bexh cr2cog7z le5p0ye3 p357zi0d gndfcl4n']/span[1]"))
+				.getText();
+		System.out.println(time);
+		
+		Actions.waittill(6000);
+
+		Connection connection1 = Database.con();
+
+		String insertSql = "INSERT INTO `sunfra_poultry`.`wa_selling_loading` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+//		String insertSql = "INSERT INTO `poutry_testdb`.`farmer_cull_bird` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+
+		try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+			ps.setString(1, location);
+			ps.setString(2, price);
+			ps.setString(3, time);
+
+			ps.setString(4, formattedDate1);
+			ps.setInt(5, stateId);
+
+			ps.executeUpdate();
+
+			System.out.println("successfull");
+			ps.close();
+			connection1.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+    }
+}
+public static int  count;
+public static List<WebElement> messagseCount;
+public static int message_in(WebDriver driver) {
+	Actions.waittill(3000);
+	messagseCount = driver.findElements(By.xpath("//div[contains(@class,'message-in' )]/div[1]"));
+	Actions.waittill(3000);
+	Actions.waittill(3000);
+	
+	count=messagseCount.size();
+	System.out.println("Total count is :"+count);
+	return count;
+}
+
+public static String posting(WebDriver driver) {
+	if(count!=0) {
+		Actions.waittill(3000);
+		int cn=0;
+		int deleted_messCount=0;
+		for (WebElement webElement : messagseCount) {
+				String text=webElement.getText();
+//				System.out.println(text);
+				
+				if(text.contains("This message was deleted")) {
+					Actions.waittill(3000);
+					Actions.click(driver, By.xpath("(//span[@data-icon='menu'])[2]"));
+					Actions.waittill(3000);
+					Actions.click(driver, By.xpath("//div[contains(text(),'Select messages')]"));
+					Actions.waittill(3000);
+					Actions.click(driver, By.xpath("//div[contains(text(),'This message was deleted')]/../../../../../..//div[@aria-hidden='true']"));
+					Actions.waittill(3000);
+					Actions.click(driver, By.xpath("//span[@data-icon='delete']"));
+					Actions.waittill(3000);
+					Actions.click(driver, By.xpath("//div[contains(text(),'Delete for me')]"));
+
+					Actions.waittill(3000);
+
+					deleted_messCount++;
+				}
+				else {
+					Actions.waittill(3000);
+					cn++;
+				}
+		}
+		System.out.println("The count of message is "+cn);
+		System.out.println("The deleted message count is "+deleted_messCount);
+		
+	}
+	return "";
+}
+
+public static void remove(WebDriver driver) throws ClassNotFoundException, SQLException 
+{
+	message_in1(driver);
+	Date currentDate1 = new Date();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String formattedDate1 = dateFormat.format(currentDate1);
+	
+
+		if(count_ar!=0) {
+//			Connection connection = Database.con();
+
+			int count=0;
+		for (WebElement webElement : raperson) {
+			Actions.waittill(4000);
+			String text=webElement.getText();				
+			if(text.contains("removed") || text.contains("added")) {
+				String one_place="";
+				one_place=one_place+text;
+				if(one_place.contains("removed")) {
+					String k="Removed";
+					String[] each_line=one_place.split("\n");
+					String admin_person=each_line[0];
+					String removed_person=each_line[2];
+					Connection connection1 = Database.con();
+
+					String insertSql = "INSERT INTO `sunfra_poultry`.`wa_ad_re_person` (ADMIN,customer, data,date) VALUES (?, ?,?,?)";
+
+					try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+//					
+						ps.setString(1, admin_person);
+						ps.setString(2, removed_person);
+						ps.setString(3, k);
+//
+						ps.setString(4, formattedDate1);
+
+						ps.executeUpdate();
+
+						System.out.println("successfull");
+						ps.close();
+						connection1.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					count++;
+				}else if (one_place.contains("added")) {
+				
+					String k="Added ";
+					if(one_place.contains("and")) {
+						String [] each_line=one_place.split("added ");
+						String []single=each_line[1].split("and");
+						for(int j=0;j<single.length;j++) {
+							String admin_person=each_line[0];
+							String added_person=single[j];
+							Connection connection1 = Database.con();
+
+							String insertSql = "INSERT INTO `sunfra_poultry`.`wa_ad_re_person` (ADMIN,customer,data,date) VALUES (?, ?,?,?)";
+
+							try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+								ps.setString(1, admin_person);
+								ps.setString(2, added_person);
+								ps.setString(3, k);
+		//
+								ps.setString(4, formattedDate1);
+
+								ps.executeUpdate();
+
+								System.out.println("successfull");
+								ps.close();
+								connection1.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+							
+							count++;
+						}
+					}
+					else {
+
+						String[] each_line=one_place.split("\n");
+					String admin_person=each_line[0];
+					String added_person=each_line[2];
+					Actions.waittill(5000);
+					Connection connection1 = Database.con();
+
+					String insertSql = "INSERT INTO `sunfra_poultry`.`wa_ad_re_person` (ADMIN ,customer, data,date) VALUES (?, ?,?,?)";
+
+					try (PreparedStatement ps = connection1.prepareStatement(insertSql)) {
+						ps.setString(1, admin_person);
+						ps.setString(2, added_person);
+						ps.setString(3, k);
+//
+						ps.setString(4, formattedDate1);
+
+						ps.executeUpdate();
+						ps.close();
+						connection1.close();
+						System.out.println("successfull");
+
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+
+					count++;
+					}
+				}					
+			}				
+		}
+		Actions.waittill(4000);
+
+		clear_chat(driver);
+
+	}
+		}
+	
+public static List<WebElement> raperson;
+public static int count_ar;
+public static int message_in1(WebDriver driver) {
+	Actions.waittill(4000);
+	raperson = driver.findElements(By.xpath("//div[@class='UzMP7 n6BPp']//div[@class='_1BOF7']"));
+	Actions.waittill(4000);
+	Actions.waittill(4000);
+	count_ar=raperson.size();
+	System.out.println("AD_RE_NUMBER IS ="+count_ar);
+	return count_ar;
+}
+public static void clear_chat(WebDriver driver){
+
+	driver.findElement(By.xpath("//div[@class='_3vsRF']//div[@aria-label='Menu']/span")).click();
+	Actions.waittill(10000);
+	driver.findElement(By.xpath("//li[@class='jScby Iaqxu FCS6Q']//div[contains(text(),'Clear chat')]")).click();
+	Actions.waittill(4000);
+	Actions.click(driver, By.xpath("//label[@for='menu-icon-clear-chat']"));
+	Actions.waittill(4000);
+	Actions.click(driver, By.xpath("//div[contains(text(),'Clear chat')]"));
+	Actions.waittill(4000);
+
+	
+	
+
+
+		
+	
+}
+
+
+}
+
+
+
+

@@ -1,0 +1,269 @@
+package com.whatsappscrap.whatsappscrap;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Necc {
+
+	static {
+		System.setProperty("webdriver.chromedriver.driver", "C:\\chromedriver.exe");
+	}
+
+	@Test
+	public void EGodawari() throws InterruptedException {
+		WebDriver driver=new ChromeDriver();
+		Date currentDate1 = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String formattedDate1 = dateFormat.format(currentDate1);
+		System.out.println(formattedDate1);
+//		String formattedDate1="01-08-2024";
+		int i=7;
+		int count=1;
+		while(i>0) {
+			int load_status=0;
+			String location=null;
+			if(count==1) {
+				driver.get("https://eggrate.in/z/E.Godavari#");
+				location="E.Godavari";
+				count++;
+			}else if(count==2) {
+				driver.get("https://eggrate.in/z/W.Godavari#");
+				location="W.Godavari";
+				count++;
+			}else if(count==3) {
+				driver.get("https://eggrate.in/z/Vijayawada#");
+				location="Vijayawada";
+				count++;
+			}else if(count==4) {
+				driver.get("https://eggrate.in/z/Chittoor#");
+				location="Chittoor";	
+				count++;
+			}else if(count==5) {
+				driver.get("https://eggrate.in/z/Ludhiana#");
+				location="Ludhiana";	
+				count++;
+			}else if(count==6) {
+				driver.get("https://eggrate.in/z/Warangal#");
+				location="Warangal";	
+				count++;
+			}else if(count==7) {
+				driver.get("https://eggrate.in/z/Hyderabad#");
+				location="Hyderabad";	
+				count++;
+			}
+			
+		String value=driver.findElement(By.xpath("//div[@class='col-sm-6']//a[contains(text(),'"+formattedDate1+"')]")).getText();
+		String price=null;
+		if(formattedDate1.equals(value)) {
+			System.out.println("Date is matching");
+			String input=driver.findElement(By.xpath("//div[@class='col-sm-6']//a[contains(text(),'"+formattedDate1+"')]/../..//td[4]")).getText();
+	        price=input.replace("₹","").trim();
+	        int stateId = 0;
+			if (location != null) {
+				if (location.equalsIgnoreCase("Chittor")||location.equalsIgnoreCase("Chittoor")) {
+					stateId = 14;
+				} else if (location.equalsIgnoreCase("E.Godavari")) {
+					stateId = 16;
+				} else if (location.equalsIgnoreCase("Ludhiana")) {
+					stateId = 18;
+				} else if (location.equalsIgnoreCase("Vijayawada")) {
+					stateId = 22;
+				} else if (location.equalsIgnoreCase("W.Godavari")) {
+					stateId = 24;
+				} else if (location.equalsIgnoreCase("Warangal")) {
+					stateId = 25;
+				}else if (location.equalsIgnoreCase("Hyderabad")) {
+					stateId = 6;
+				}
+				System.out.println("Location = " + location);
+	            System.out.println("price = " + price);
+	            System.out.println("State ID = " + stateId);
+	    		System.out.println("Load Status: " + load_status);
+			}
+				((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+				for (String windowHandle : driver.getWindowHandles()) {
+					driver.switchTo().window(windowHandle);
+				}
+				String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+	    				+ load_status + "&price=" + price ;
+	    		System.out.println("URL: " + url);
+	    		Thread.sleep(3000);
+	    		driver.get(url);
+	    		Thread.sleep(3000);
+	    		driver.close();
+				driver.switchTo().window(driver.getWindowHandles().iterator().next());
+		}
+		else {
+			System.out.println("Date are not matching");
+		}
+			i--;
+		}
+		driver.quit();
+	}
+	
+	@Test
+	public void Ludhiana() throws InterruptedException {
+		WebDriver driver=new ChromeDriver();
+		Date currentDate1 = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String formattedDate1 = dateFormat.format(currentDate1);
+		System.out.println(formattedDate1);
+		int i=3;
+		int count=1;
+		while(i>0) {
+			int load_status=0;
+			String location=null;
+			if(count==1) {
+				driver.get("https://eggrate.in/z/Ludhiana#");
+				location="Ludhiana";	
+				count++;
+			}else if(count==2) {
+				driver.get("https://eggrate.in/z/Warangal#");
+				location="Warangal";	
+				count++;
+			}else if(count==3) {
+				driver.get("https://eggrate.in/z/Hyderabad#");
+				location="Hyderabad";	
+				count++;
+			}
+		String value=driver.findElement(By.xpath("//div[@class='col-sm-6']//a[contains(text(),'"+formattedDate1+"')]")).getText();
+		String price=null;
+		if(formattedDate1.equals(value)) {
+			System.out.println("Date is matching");
+			String input=driver.findElement(By.xpath("//div[@class='col-sm-6']//a[contains(text(),'"+formattedDate1+"')]/../..//td[4]")).getText();
+	        price=input.replace("₹","").trim();
+	        int stateId = 0;
+			if (location != null) {
+				if (location.equalsIgnoreCase("Ludhiana")) {
+					stateId = 18;
+				} else if (location.equalsIgnoreCase("Warangal")) {
+					stateId = 25;
+				}else if (location.equalsIgnoreCase("Hyderabad")) {
+					stateId = 6;
+				}
+				System.out.println("Location = " + location);
+	            System.out.println("price = " + price);
+	            System.out.println("State ID = " + stateId);
+	    		System.out.println("Load Status: " + load_status);
+			}
+				((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+				for (String windowHandle : driver.getWindowHandles()) {
+					driver.switchTo().window(windowHandle);
+				}
+				String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+	    				+ load_status + "&price=" + price;
+	    		System.out.println("URL: " + url);
+	    		Thread.sleep(3000);
+	    		driver.get(url);
+	    		Thread.sleep(3000);
+	    		driver.close();
+				driver.switchTo().window(driver.getWindowHandles().iterator().next());
+		}
+		else {
+			System.out.println("Date are not matching");
+		}
+			i--;
+		}
+		driver.close();
+	
+	}
+	@Test
+	public void Test() throws InterruptedException {
+		WebDriver driver=new ChromeDriver();
+		Date currentDate1 = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String formattedDate1 = dateFormat.format(currentDate1);
+		System.out.println(formattedDate1);
+//		String formattedDate1="01-08-2024";
+		int i=7;
+		int count=1;
+		while(i>0) {
+			int load_status=0;
+			String location=null;
+			if(count==1) {
+				driver.get("https://eggrate.in/z/E.Godavari#");
+				location="E.Godavari";
+				count++;
+			}else if(count==2) {
+				driver.get("https://eggrate.in/z/W.Godavari#");
+				location="W.Godavari";
+				count++;
+			}else if(count==3) {
+				driver.get("https://eggrate.in/z/Vijayawada#");
+				location="Vijayawada";
+				count++;
+			}else if(count==4) {
+				driver.get("https://eggrate.in/z/Chittoor#");
+				location="Chittoor";	
+				count++;
+			}else if(count==5) {
+				driver.get("https://eggrate.in/z/Ludhiana#");
+				location="Ludhiana";	
+				count++;
+			}else if(count==6) {
+				driver.get("https://eggrate.in/z/Warangal#");
+				location="Warangal";	
+				count++;
+			}else if(count==7) {
+				driver.get("https://eggrate.in/z/Hyderabad#");
+				location="Hyderabad";	
+				count++;
+			}
+			
+		String value=driver.findElement(By.xpath("//div[@class='col-sm-6']//a[contains(text(),'"+formattedDate1+"')]")).getText();
+		String price=null;
+		if(formattedDate1.equals(value)) {
+			System.out.println("Date is matching");
+			String input=driver.findElement(By.xpath("//div[@class='col-sm-6']//a[contains(text(),'"+formattedDate1+"')]/../..//td[4]")).getText();
+	        price=input.replace("₹","").trim();
+	        int stateId = 0;
+			if (location != null) {
+				if (location.equalsIgnoreCase("Chittor")||location.equalsIgnoreCase("Chittoor")) {
+					stateId = 14;
+				} else if (location.equalsIgnoreCase("E.Godavari")) {
+					stateId = 16;
+				} else if (location.equalsIgnoreCase("Ludhiana")) {
+					stateId = 18;
+				} else if (location.equalsIgnoreCase("Vijayawada")) {
+					stateId = 22;
+				} else if (location.equalsIgnoreCase("W.Godavari")) {
+					stateId = 24;
+				} else if (location.equalsIgnoreCase("Warangal")) {
+					stateId = 25;
+				}else if (location.equalsIgnoreCase("Hyderabad")) {
+					stateId = 6;
+				}
+				System.out.println("Location = " + location);
+	            System.out.println("price = " + price);
+	            System.out.println("State ID = " + stateId);
+	    		System.out.println("Load Status: " + load_status);
+			}
+				((JavascriptExecutor) driver).executeScript("window.open('', '_blank');");
+				for (String windowHandle : driver.getWindowHandles()) {
+					driver.switchTo().window(windowHandle);
+				}
+				String url = "http://poultry.sunfra.in/whatsapp_prices?state_id=" + stateId + "&load_status="
+	    				+ load_status + "&price=" + price ;
+	    		System.out.println("URL: " + url);
+	    		Thread.sleep(3000);
+	    		driver.get(url);
+	    		Thread.sleep(3000);
+	    		driver.close();
+				driver.switchTo().window(driver.getWindowHandles().iterator().next());
+		}
+		else {
+			System.out.println("Date are not matching");
+		}
+			i--;
+		}
+		driver.quit();
+	}
+}

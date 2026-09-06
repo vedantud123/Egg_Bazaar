@@ -1,0 +1,5 @@
+2025/10/01-03:30:08.071 26a4 Reusing MANIFEST C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\shared_proto_db\metadata/MANIFEST-000001
+2025/10/01-03:30:08.071 26a4 Recovering log #3
+2025/10/01-03:30:08.186 26a4 (ignoring error) C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\shared_proto_db\metadata/000003.log: dropping 28936 bytes; Corruption: checksum mismatch
+2025/10/01-03:30:08.225 26a4 (ignoring error) C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\shared_proto_db\metadata/000003.log: dropping 12 bytes; Corruption: missing start of fragmented record(2)
+2025/10/01-03:30:08.226 26a4 Reusing old log C:\Users\Vinay server 3\eclipse-workspace\manasaa\Default\shared_proto_db\metadata/000003.log 

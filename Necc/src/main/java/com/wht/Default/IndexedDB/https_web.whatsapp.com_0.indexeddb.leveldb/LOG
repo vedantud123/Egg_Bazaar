@@ -1,0 +1,19 @@
+2023/10/20-16:45:00.513 468c Reusing MANIFEST C:\Users\Vamsi\eclipse-workspace\whatsappscrap\src\main\java\com\wht\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/10/20-16:45:00.514 468c Recovering log #115
+2023/10/20-16:45:00.528 468c Reusing old log C:\Users\Vamsi\eclipse-workspace\whatsappscrap\src\main\java\com\wht\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000115.log 
+2023/10/20-16:45:01.562 3b48 Level-0 table #123: started
+2023/10/20-16:45:01.698 3b48 Level-0 table #123: 288610 bytes OK
+2023/10/20-16:45:01.721 3b48 Delete type=0 #115
+2023/10/20-16:45:01.722 468c Manual compaction at level-0 from '\x00\x1d\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1e\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/10/20-16:45:01.912 6728 Compacting 1@1 + 4@2 files
+2023/10/20-16:45:02.137 6728 Generated table #124@1: 44952 keys, 2198042 bytes
+2023/10/20-16:45:02.356 6728 Generated table #125@1: 25100 keys, 2183206 bytes
+2023/10/20-16:45:02.554 6728 Generated table #126@1: 46400 keys, 2208587 bytes
+2023/10/20-16:45:02.624 6728 Generated table #127@1: 19429 keys, 426341 bytes
+2023/10/20-16:45:02.624 6728 Compacted 1@1 + 4@2 files => 7016176 bytes
+2023/10/20-16:45:02.662 6728 compacted to: files[ 0 0 4 0 0 0 0 ]
+2023/10/20-16:45:02.662 6728 Delete type=2 #117
+2023/10/20-16:45:02.662 6728 Delete type=2 #118
+2023/10/20-16:45:02.662 6728 Delete type=2 #119
+2023/10/20-16:45:02.662 6728 Delete type=2 #120
+2023/10/20-16:45:02.662 6728 Delete type=2 #123

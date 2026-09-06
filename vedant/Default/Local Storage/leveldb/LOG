@@ -1,0 +1,14 @@
+2025/10/22-18:45:11.640 32b8 Reusing MANIFEST C:\Users\Vinay server 3\eclipse-workspace\vedant\Default\Local Storage\leveldb/MANIFEST-000001
+2025/10/22-18:45:11.647 32b8 Recovering log #9
+2025/10/22-18:45:11.650 32b8 Reusing old log C:\Users\Vinay server 3\eclipse-workspace\vedant\Default\Local Storage\leveldb/000009.log 
+2025/10/22-18:58:24.876 2310 Level-0 table #13: started
+2025/10/22-18:58:24.900 2310 Level-0 table #13: 13594 bytes OK
+2025/10/22-18:58:24.921 2310 Delete type=0 #9
+2025/10/22-18:58:24.922 2310 Compacting 4@0 + 0@1 files
+2025/10/22-18:58:24.941 2310 Generated table #14@0: 109 keys, 9258 bytes
+2025/10/22-18:58:24.942 2310 Compacted 4@0 + 0@1 files => 9258 bytes
+2025/10/22-18:58:24.967 2310 compacted to: files[ 0 1 0 0 0 0 0 ]
+2025/10/22-18:58:24.969 2310 Delete type=2 #3
+2025/10/22-18:58:24.969 2310 Delete type=2 #7
+2025/10/22-18:58:24.969 2310 Delete type=2 #10
+2025/10/22-18:58:24.969 2310 Delete type=2 #13

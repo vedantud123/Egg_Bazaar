@@ -1,0 +1,648 @@
+package com.poultry;
+
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.text.ParseException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class Cullbird_scrapdata 
+{
+
+public static int cullbird_ScrapMessage(WebDriver driver) throws ClassNotFoundException, SQLException {
+	int messageCount =0;
+	LocalDate currentDate = LocalDate.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+	String formattedDate = currentDate.format(formatter);
+	System.out.println(formattedDate);
+	Actions.waittill(30000);
+	Actions.waittill(10000);
+
+	String xpathExpression = "//div[contains(@class, 'message-in')]//div[contains(@data-pre-plain-text,'"
+			+ formattedDate + "')]";
+	Actions.waittill(5000);
+
+	List<WebElement> todayMessages = driver.findElements(By.xpath(xpathExpression));
+
+	 messageCount = todayMessages.size();
+	System.out.println("Today's cull birds message count: " + messageCount);
+	if(messageCount==0) 
+	{
+		return 0;
+	}	
+	Actions.waittill(7000);
+	String xpath="//div[@class='_3B19s']//div[contains(@class, 'message-in')]//div[@class='_30oSb']//div[@tabindex=-1]";
+	Common_Method.forward(driver, Globalconstant.tradingLayerForwardGroup, Globalconstant.tradingLayerMainGroup, xpath);
+	boolean check = true;
+	int i = 0;
+	
+	Actions.waittill(3000);
+Date currentDate1 = new Date();
+SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+String formattedDate1 = dateFormat.format(currentDate1);
+
+for (i = 0; i < messageCount; i++) {
+	while (check) {
+		String readmore = Actions.getText(driver, By.xpath(
+				"(//div[contains(@class, 'message-in')]//div[contains(@class, 'read-more-button')])[1]"));
+		if (readmore.equals("Read more")) {
+			Actions.waittill(3000);
+			Actions.click(driver, By.xpath(
+					"(//div[contains(@class, 'message-in')]//div[contains(@class, 'read-more-button')])[1]"));
+		} else {
+			break;
+		}
+	}
+	String Message = Actions.getText(driver, By.xpath(
+			"(//div[@class='_3B19s']//div[contains(@class, 'message-in')]//span[contains(@class, 'selectable-text')])["
+					+ (i + 1) + "]"));
+	Message=Message.replace("𝗣𝗢𝗨𝗟𝗧𝗥𝗬 𝗜𝗡𝗗𝗨𝗦𝗧𝗥𝗬", "POULTRY INDUSTRY");
+	try {
+		System.out.println(new String(Message.getBytes("UTF-8"), "UTF-8"));
+	} catch (UnsupportedEncodingException e) {
+		e.printStackTrace();
+	}
+	
+	String Group_name = "layer";
+	System.out.println("group_name : " + Group_name);
+
+	String insertSql1 = "INSERT INTO `sunfra_poultry`.`whatsapp_msgs` (group_name,message,posted_date) VALUES (?,?,?)";
+	Database.store_mess(insertSql1, Group_name, Message, formattedDate1);
+	System.out.println("done with cull db");
+	 String[] lines = Message.split("\n");
+	 Actions.waittill(3000);
+	int count=0;
+	 Actions.waittill(3000);
+	if(Message.contains("Tomorrow Estimated of")) {
+		
+	}
+	else if(Message.contains("Layer Farmer Cull Bird Per Kg Rates")) {
+		System.out.println("am in layer");
+		String value="";
+		if(Message.contains("Per Bird")) {
+			value=value+"Per Bird";
+		}
+		else if (Message.contains("Per Pieces")) {
+			value=value+"Per Pieces";
+		}
+		Actions.waittill(3000);
+		String[] parts=Message.split(value);
+
+	String layerFarmerCullBirdRates = parts[0];
+	System.out.println(layerFarmerCullBirdRates);
+	if (parts.length > 0) {
+        String ratesPart = parts[0].trim(); // Get the first part (contains rates)
+
+	Actions.waittill(10000);
+	Actions.waittill(3000);
+
+	 String[] lines1 = ratesPart.split("\n");
+	 int load_status = 0;
+		for (String line : lines1)
+		{			
+		        Pattern pattern = Pattern.compile("([A-Za-z]+(?: [A-Za-z]+)*)-([0-9/]+)");
+		        Matcher matcher = pattern.matcher(line);
+		        if(!matcher.find()) {
+					continue;
+					
+				}
+	        	if(line.contains("Date")) {
+				} 	  
+	        	else if (line.contains("-")) {
+		            String[] splitLine = line.split("-");
+		            String location = splitLine[0].trim();
+		             if (location.contains("Panipat and Surrounding Cull Birds Rates")) {
+		            	    location = "Panipat";
+		            	}		          
+		            
+		            String price = splitLine[1].trim();
+		            
+		             if (price.contains("/")) {
+		    			String[] priceArray = price.split("[/]");
+		    			price = String.valueOf(getAverage(priceArray[0], priceArray[1]));
+		    			
+		    		}else if (price.contains(" (Lifting Rates)")) {
+		                price = price.replace(" (Lifting Rates)", "");
+		            }
+		     
+		            System.out.println("PRICE =" + price);
+		            System.out.println("Location = " + location);
+		            int stateId=loc.state_layer(location);
+					
+					System.out.println("State ID = " + stateId);
+					System.out.println("Load Status: " + load_status);
+					count++;
+					
+					Actions.url(driver,"wa_cullbird_prices", "state_id="+stateId , "load_status="+load_status, "price="+price, "date=null");
+					Actions.waittill(6000);
+    				String time=Actions.time(driver);
+					Actions.waittill(6000);
+					String insertSql = "INSERT INTO `sunfra_poultry`.`wa_cull_bird` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+					Database.pass_todatabase(insertSql, location, price, time, formattedDate1, stateId);
+	        	}
+			}
+		}
+	}
+
+else if (Message.contains("Open Loading Range")||Message.contains("Closed Loading Range")||Message.contains("Closed Range Rates")||Message.contains("Open Range Rates")||Message.contains("Open selling Range Rates")||Message.contains("Closed selling Range Rates")||Message.contains("Closing Range Rates"))
+{
+	Actions.waittill(3000);
+	int load_status = 1;
+	 for (String line : lines) {
+		 	if(line.contains("Hyderabad Plastic")) {
+		 		continue;
+		 	}
+		 	if(line.contains("HYD Plastic")) {
+		 		String statement=line;
+		 		statement=statement.replace("HYD Plastic", "Hyderabad");
+		 		String []split_statement=statement.split("/");
+		 		line=split_statement[0];
+		 	}
+	        Pattern pattern = Pattern.compile("\\b\\d{3}\\b");
+	        Matcher matcher = pattern.matcher(line);
+
+	        if (!matcher.find()) {
+	            continue;
+	        }
+	        
+	        if (line.contains("-")) {
+	            String[] splitLine = line.split("-");
+	            String location = splitLine[0].trim().replaceAll("\\(.*\\)", "");
+	            String price = splitLine[1].trim();
+	            if(price.contains("+"))
+        		{
+        	      price=price.replace("+", "");
+        		}
+	            if (price.contains("/")) {
+	    			String[] priceArray = price.split("[/]");
+	    			price = String.valueOf(getAverage(priceArray[0], priceArray[1]));	
+	    		}       
+	            System.out.println("Location = " + location);
+	            System.out.println("price = " + price);
+	            int stateId=loc.state_loading(location);
+
+	  	  					System.out.println("State ID = " + stateId);
+							System.out.println("Load Status: " + load_status);
+							count++;
+							Actions.url(driver,"whatsapp_prices", "state_id="+stateId , "load_status="+load_status, "price="+price, "date=null");
+							Actions.waittill(9000);
+		    				String time=Actions.time(driver);
+							Actions.waittill(6000);
+							String insertSql = "INSERT INTO `sunfra_poultry`.`wa_paper` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+							Database.pass_todatabase(insertSql, location, price, time, formattedDate1, stateId);
+	        }
+	 }
+}
+else if (Message.contains("EGGS")) {
+    Actions.waittill(3000);
+
+    List<String> normalPrices = new ArrayList<>();
+    List<String> loadingSellingPrices = new ArrayList<>();
+    List<String> neccPrices = new ArrayList<>();
+
+    for (String line : lines) {
+    	if(line.contains("Jabalpur") && Message.contains("selling")) {
+       	 continue;   
+    	}
+    	if(line.contains("Ahmedabad")) {
+    		line=line.replace("Ahmedabad", "Ahmedabad Loading");
+    	}
+        if (line.contains("EGGS")) {
+            neccPrices.add(line);
+        } else if (line.contains("Loading") || line.contains("selling")|| line.contains("Open Markets")) {
+            loadingSellingPrices.add(line);
+        } else {
+            normalPrices.add(line);
+        }
+    }
+
+    System.out.println("paper_rate:");
+    for (String line : normalPrices) {
+        paper_rates(line,driver);
+    }
+
+    System.out.println("loading_rate:");
+    for (String line : loadingSellingPrices) {
+        loading_rates(line,driver);
+    }
+
+}
+	else if (Message.contains("Paper rate for")||Message.contains("Paper rates for"))
+	{
+		Actions.waittill(3000);
+int load_status = 0;
+String date2="";
+for (String line : lines) {
+	
+
+        
+	if (line.contains("Paper rate for")||line.contains("Paper rates for")) {
+		String date =null;
+		if(line.contains("Paper rate for")){
+			date = line.split("Paper rate for")[1].trim();
+		}
+		else if (line.contains("Paper rates for")) {
+			date = line.split("Paper rates for")[1].trim();
+		}
+      System.out.println(date);
+      String inputDateStr =date ; 
+      inputDateStr = inputDateStr.replaceAll("(?<=\\d)(?:st|nd|rd|th)", "");
+      inputDateStr = inputDateStr + " 2024"; 
+    
+      SimpleDateFormat inputFormat = new SimpleDateFormat("dd MMMM yyyy");
+      SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+      try {
+          Date date1 = inputFormat.parse(inputDateStr);
+           date2=outputFormat.format(date1);
+          System.out.println("Original Date: " + inputDateStr);
+          System.out.println("Formatted Date: " + date2);
+      } catch (ParseException e) {
+          System.err.println("Error parsing date: " + e.getMessage());
+      }
+      
+	}
+	
+	Pattern regex = Pattern.compile("\\b\\d{3}\\b");
+	Matcher matcher = regex.matcher(line);
+	if(!matcher.find()) {
+		continue;
+	}
+	if(line.contains("CHENNAI NORTH")) {
+	}
+	 if(line.contains("-")) {
+		 String[] splitLine = line.split("-");
+       String location = splitLine[0].trim().replace("Trading", "");
+       if (location.equalsIgnoreCase("CHENNAI NORTH")) 
+         {
+             continue; 
+         }
+         String price = splitLine[1].trim();
+         System.out.println("Location = " + location);
+         System.out.println("price = " + price);
+         int stateId=loc.state_paper(location);
+
+		System.out.println("State ID = " + stateId);
+		System.out.println("Load Status: " + load_status);
+		count++;
+	
+		Actions.url(driver,"whatsapp_prices", "state_id="+stateId , "load_status="+load_status, "price="+price, "date="+date2);
+		Actions.waittill(6000);
+		String time=Actions.time(driver);
+		Actions.waittill(6000);
+
+		String insertSql = "INSERT INTO `sunfra_poultry`.`wa_paper` (location, price ,time,storedtime,state_id) VALUES (?, ? , ? ,?,?)";
+		Database.pass_todatabase(insertSql, location, price, time, formattedDate1, stateId);
+	}
+}
+}
+	else if(Message.contains("necc rate") || Message.contains("Declared rate")||Message.contains("revised rate")||Message.contains("BFTA Barwala rate")||Message.contains("BFTA Barwala same rate")||Message.contains("necc same rate")||Message.contains("Declared same rate"))
+	{		
+			Actions.waittill(3000);
+			if(Message.contains("Jabalpur ")) {
+				continue;
+			}
+			Actions.waittill(3000);
+			int load_status=0;
+			String date2="";
+			LocalDate currentDate_W = LocalDate.now();
+			DateTimeFormatter formatter_W = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String formattedDate_W = currentDate_W.format(formatter_W);
+			System.out.println("Windows date :"+formattedDate_W);
+				
+			for(String line : lines) {
+				 line=line.replace("same", "").trim();
+				 if(line.contains("for")) 
+				 {
+				        String date = line.split("for")[1].trim();
+			  	       
+				        String inputDateStr =date ; 
+				        inputDateStr = inputDateStr.replaceAll("(?<=\\d)(?:st|nd|rd|th)", "");
+				        inputDateStr = inputDateStr + " 2024"; 
+					    // Create SimpleDateFormat objects
+				        SimpleDateFormat inputFormat = new SimpleDateFormat("dd MMMM yyyy");
+				        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+				        try {
+				            Date date1 = inputFormat.parse(inputDateStr);
+				             date2=outputFormat.format(date1);
+				             System.out.println("Message date:");
+				            System.out.println("Original Date: " + inputDateStr);
+				            System.out.println("Formatted Date: " + date2);
+				        } catch (ParseException e) {
+				            System.err.println("Error parsing date: " + e.getMessage());
+				        }
+				 }
+				Pattern pattern = Pattern.compile("\\b\\d{3}\\b");
+				Matcher matcher = pattern.matcher(line);
+			        if (!matcher.find()) {
+			            continue;
+			        }
+			        if(line.contains("rate")) {
+			        	String[] splitline=line.split("rate");
+			        	String location="";
+			        	String price="";
+			        	if(line.contains("+") && line.contains("=")|| line.contains("-")&& line.contains("=")) {
+			        		
+			        		if(line.contains("BFTA Barwala")) {
+			        			location=splitline[0].trim();
+			        		}else {
+			        			String []left=splitline[0].split(" ");
+				        		location=location+left[0];
+				        		if(location.contains("West")) {
+				        			location="Kolkata";
+				        		}	
+			        		}			        		
+			        		String []right=splitline[1].split("=");
+			        		String[] right_side=right[1].split(" ");
+			        		price=price+right_side[0];		        					        	
+			        	}
+			        	else {
+			        		if(line.contains("BFTA Barwala")) {
+			        			location=splitline[0].trim();
+			        		}
+			        		else {
+			        			String []left=splitline[0].split(" ");
+				        		location=location+left[0];
+				        		if(location.contains("West")) {
+				        			location="Kolkata";
+				        		}
+			        		}			        		
+			        		String[] right=splitline[1].split("for");		
+			        		price=price+right[0].trim();
+						}
+			        	int stateId=loc.state_paper(location);
+			        	System.out.println("Location = " + location);
+			            System.out.println("price = " + price);
+			            System.out.println("State ID = " + stateId);
+			    		System.out.println("Load Status: " + load_status);
+			            			            
+			            if(date2.equals(formattedDate_W)) {
+							Actions.url(driver,"whatsapp_prices", "state_id="+stateId , "load_status="+load_status, "price="+price, "date=null");
+				    	}else {
+							Actions.url(driver,"whatsapp_prices", "state_id="+stateId , "load_status="+load_status, "price="+price, "date="+date2);
+				    	}
+					    	Actions.waittill(9000);
+					    	String time=Actions.time(driver);
+							Actions.waittill(6000);
+					    	String insertSql = "INSERT INTO `sunfra_poultry`.`wa_paper` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+					    	Database.pass_todatabase(insertSql, location, price, time, formattedDate1, stateId);
+				    		}
+			        }
+			}
+	
+	else if(Message.contains("Feeds")||Message.contains("Maize")) {
+		String category=null;
+		String location=null;
+		String price=null;
+        for(String line:lines) {
+        	if(line.contains("RPK-Harihar")) {
+        		continue;
+        	}
+    		boolean check_value=false;
+        	if(line.contains("Groundnut Extraction")||line.contains("DORB")||line.contains("Mustard De Oiled Cake")||line.contains("Soya De Oiled Cake")) {
+        		category=line;
+        	}else if(line.contains("Maize")) {
+        		category="Maize";
+        	}
+        	else if (line.contains("%") && line.contains("DOC")||line.contains("%") && line.contains("ROC")){
+        		Actions.waittill(2000);
+				String []each_line=line.split("%");
+				location=each_line[0]+"%";
+				price=each_line[1].replace("-", "");
+				check_value=true;				
+        	}
+			else if(line.contains("-")) {
+        		 if(line.contains("Sai Simran Nanded")) {	
+				   }else if(line.contains("Shriniwasa Cattle Feeds Nanded")) {
+				   }else if (line.contains("Nanded")) {
+					   line=line.replace("Nanded", "Shriniwasa Cattle Feeds Nanded");
+				   }
+        		String[] Seperate_line=line.split("-");
+        		 if(Seperate_line.length==2) {
+					   location=Seperate_line[0].replace("(Ready)", "").replace("(Ready Loading)", "");
+					   price=Seperate_line[1];
+					   Actions.waittill(2000);
+					   if(price.contains("/")) {
+						   String []split_price=price.split("/");
+						   int a=Integer.parseInt(split_price[0]);
+						   int b=Integer.parseInt(split_price[1]);
+						   int c=((a+b))/2;
+						   price=Integer.toString(c);
+//						   System.out.println(price);
+					   }
+					   if(price.contains(" ")) {
+						   	String []pass=price.split(" ");
+							  price=pass[0];
+					   }
+					   else if(price.contains("(")) {
+							  String []pass=price.split("\\(");
+							  price=pass[0];
+					   }
+					   price=price.replaceAll("[^0-9]", "");
+						check_value=true;
+        		 } else if(Seperate_line.length==3) {
+						String ele=Seperate_line[0]+" "+Seperate_line[1];
+						location=ele.replace("(Ready)", "").replace("(Ready Loading)", "");
+						price=Seperate_line[2];
+						if(price.contains("/")) {
+							   String []split_price=price.split("/");
+							   int a=Integer.parseInt(split_price[0]);
+							   int b=Integer.parseInt(split_price[1]);
+							   int c=((a+b))/2;
+							   price=Integer.toString(c);
+//							   System.out.println(price);
+						}
+						check_value=true;
+				}
+        	}
+        	if (check_value) {
+        		System.out.println("Category : "+category); 
+        		System.out.println("Location : "+location);
+        		System.out.println("price : "+price);
+        		Actions.waittill(3000);
+				Actions.url(driver,"wa_feed_prices", "category="+category , "location="+location, "price="+price, "date=null");
+        	}		
+        }
+	}
+	else {
+		System.out.println("not ........in .......layer");
+	}
+}
+return messageCount;
+}
+
+public static String[] getLocationAndPrice(String line) {
+	if (line.contains("/")) {
+		line = line.split("[/]")[0];
+	}
+	String[] arr = line.split(" ");
+	String location = arr[0];
+
+	String price = arr[arr.length - 1];
+	String regex = "\\b\\d{3}\\b";
+	boolean contains3Digits = price.matches(".*" + regex + ".*");
+	price = contains3Digits ? arr[arr.length - 1] : arr[arr.length - 2];
+	if (price.contains("-")) {
+		String[] priceArray = price.split("[-]");
+		price = String.valueOf(getAverage(priceArray[0], priceArray[1]));
+	}
+	String[] locationAndPrice = { location, price };
+	return locationAndPrice;
+}
+
+public static int getAverage(String a, String b)
+   {
+	return (int) ((Integer.parseInt(a) + Integer.parseInt(b)) / (double) 2);
+   }
+
+public static void paper_rates(String line,WebDriver driver) throws SQLException {
+	int load_status = 0;
+	LocalDate currentDate = LocalDate.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+	String formattedDate = currentDate.format(formatter);
+	System.out.println(formattedDate);
+	Date currentDate1 = new Date();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String formattedDate1 = dateFormat.format(currentDate1);
+	 if (line.contains("Hyderabad Plastic")||line.contains("Varanasi")||line.contains("Chennai Manager Association")||line.contains("Kolkata")||line.contains("Raipur")||line.contains("Ajmer")||line.contains("BFTA Barwala")||line.contains("Hyderabad NECC")||line.contains("Ajmer")||line.contains("Namakkal")) 
+     {
+     	return;
+     }
+    String[] parts = line.split("-");
+    if (parts.length >= 2) {
+    	
+        String location = parts[0].replace("Layer Farmer Association", "").replace("BFTA ", "").replace("Association", "").replace("Zonal Rate", "").replace("(Tanuku)", "").replace(" NECC", "").replace("(Orissa)", "").trim();
+        String price = parts[1].trim().replaceAll("\\(.*\\)", "");
+        System.out.println("Location = " + location);
+        System.out.println("Price = " + price);
+        int stateId=loc.state_paper(location);
+		System.out.println("State ID = " + stateId);
+		System.out.println("load status ="+ load_status );
+		Actions.url(driver,"whatsapp_prices", "state_id="+stateId , "load_status="+load_status, "price="+price, "date=null");
+		Actions.waittill(9000);
+		String time=Actions.time(driver);
+		Actions.waittill(6000);
+		String insertSql = "INSERT INTO `sunfra_poultry`.`wa_paper` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+		Database.pass_todatabase(insertSql, location, price, time, formattedDate1, stateId);
+	}		
+}
+
+public static void loading_rates(String line,WebDriver driver) throws SQLException {
+	LocalDate currentDate = LocalDate.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+	String formattedDate = currentDate.format(formatter);
+	System.out.println(formattedDate);
+	Date currentDate1 = new Date();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String formattedDate1 = dateFormat.format(currentDate1);
+	int load_status = 1;
+    String[] parts = line.split("-");
+    if (parts.length >= 2) {
+        String location = parts[0].replace("Loading", "").replace("selling", "").replace("Open Markets", "").trim();
+        String price = parts[1].trim();
+
+        System.out.println("Location  = " + location);
+        System.out.println("Price = " + price);
+        int stateId=loc.state_loading(location);
+		System.out.println("State ID = " + stateId);
+		System.out.println("load status ="+ load_status );
+		Actions.url(driver,"whatsapp_prices", "state_id="+stateId , "load_status="+load_status, "price="+price, "date=null");
+
+	Actions.waittill(9000);
+	String time=Actions.time(driver);
+	Actions.waittill(6000);
+
+		String insertSql = "INSERT INTO `sunfra_poultry`.`wa_selling_loading` (location, price,time,storedtime,state_id) VALUES (?, ?,?,?,?)";
+		Database.pass_todatabase(insertSql, location, price, time, formattedDate1, stateId);
+    }
+}
+
+public static void remove(WebDriver driver) throws ClassNotFoundException, SQLException 
+{
+	message_in1(driver);
+	Date currentDate1 = new Date();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String formattedDate1 = dateFormat.format(currentDate1);
+		if(count_ar!=0) {
+		for (WebElement webElement : raperson) {
+			String admin=null;
+			String customer=null;
+			String AddedOrRemoved=null;
+			Actions.waittill(4000);
+			String text=webElement.getText();				
+			if(text.contains("removed") || text.contains("added")) {
+				String one_place="";
+				one_place=one_place+text;
+				if(one_place.contains("removed")) {
+					AddedOrRemoved="Removed";
+					String[] each_line=one_place.split("removed");
+					admin=each_line[0].trim();
+					customer=each_line[1].trim();
+					Database.removed(admin, customer, AddedOrRemoved, formattedDate1);
+				}else if (one_place.contains("added")) {
+					AddedOrRemoved="Added";
+					if(one_place.contains("and")) {
+						String [] each_line=one_place.split("added ");
+						String []single=each_line[1].split("and");
+						for(int j=0;j<single.length;j++) {
+							admin=each_line[0];
+							customer=single[j];
+							Database.removed(admin, customer, AddedOrRemoved, formattedDate1);
+						}
+					}
+					else {
+						String[] each_line=one_place.split("added");
+					admin=each_line[0].trim();
+					customer=each_line[1].trim();
+					Actions.waittill(5000);
+					Database.removed(admin, customer, AddedOrRemoved, formattedDate1);
+				
+					}
+				}	
+			}				
+		}
+		Actions.waittill(3000);
+		clear_chat(driver);
+	}
+}
+	
+public static List<WebElement> raperson;
+public static int count_ar;
+public static int message_in1(WebDriver driver) {
+	Actions.waittill(4000);
+	raperson = driver.findElements(By.xpath("//div[@class='UzMP7 n6BPp']//div[@class='_1BOF7']"));
+	Actions.waittill(4000);
+	Actions.waittill(4000);
+	count_ar=raperson.size();
+	System.out.println("AD_RE_NUMBER IS ="+count_ar);
+	return count_ar;
+}
+
+public static void clear_chat(WebDriver driver){
+	driver.findElement(By.xpath("//div[@class='_3vsRF']//div[@aria-label='Menu']/span")).click();
+	Actions.waittill(10000);
+	driver.findElement(By.xpath("//li[@class='jScby Iaqxu FCS6Q']//div[contains(text(),'Clear chat')]")).click();
+	Actions.waittill(4000);
+	Actions.click(driver, By.xpath("//label[@for='menu-icon-clear-chat']"));
+	Actions.waittill(4000);
+	Actions.click(driver, By.xpath("//div[contains(text(),'Clear chat')]"));
+	Actions.waittill(4000);
+
+}
+
+
+}
+
+
+
+

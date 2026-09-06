@@ -1,0 +1,4 @@
+2024/11/10-03:30:05.458 2c94 Reusing MANIFEST C:\Users\Vinay server 3\eclipse-workspace\userdata\userdata2\Default\Site Characteristics Database/MANIFEST-000001
+2024/11/10-03:30:05.459 2c94 Recovering log #7
+2024/11/10-03:30:05.469 2c94 (ignoring error) C:\Users\Vinay server 3\eclipse-workspace\userdata\userdata2\Default\Site Characteristics Database/000007.log: dropping 15203 bytes; Corruption: checksum mismatch
+2024/11/10-03:30:05.469 2c94 (ignoring error) C:\Users\Vinay server 3\eclipse-workspace\userdata\userdata2\Default\Site Characteristics Database/000007.log: dropping 20 bytes; Corruption: missing start of fragmented record(2)
